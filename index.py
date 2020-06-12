@@ -1,4 +1,4 @@
-TEXT = "print string words new line x equals [] new line if cool equals cool new line print string cool new line back tab new line print string out of tab"
+TEXT = "print string words new line x equals [] new line if cool equals cool new line print string cool new line if cool equals cooler new line print one new line back tab new line print string out of tab new line back tab new line print string complete"
 
 lines = [x.strip() for x in TEXT.split("new line")]
 
@@ -17,7 +17,12 @@ for i in range(len(lines)):
     elif words[0] == "print" and words[1] == "string":
         lines[i] = "\t"*addTab + "print(\"" + "".join(words[2:]) + "\")"
     elif words[0] == "print":
-        lines[i] = "\t"*addTab + "print(" + " ".join(words[1:]) + ")"
+        print(words[1])
+        # print(word_to_num(words[1]))
+        try:
+            lines[i] = "\t"*addTab + "print(" + str(word_to_num[words[1]]) + ")"
+        except:
+            lines[i] = "\t"*addTab + "print(" + " ".join(words[1:]) + ")"
     elif words[1] == "equals":
         try:
             lines[i] = "\t"*addTab + words[0] + \
@@ -33,7 +38,8 @@ for i in range(len(lines)):
         addTab += 1
 
 
-print("\n".join(lines))
+# print("\n".join(lines))
 
-toParse = "\n".join(lines)
+toParse = "\n".join([x for x in lines if x != ""])
 
+print(toParse)
