@@ -1,4 +1,4 @@
-TEXT = "print string words new line x equals [] new line if cool equals cool new line print string cool new line if cool equals cooler new line print one new line back tab new line print string out of tab new line back tab new line print string complete"
+TEXT = "print string words new line x equals one new line if cool equals cool new line print string cool new line if cool equals cooler new line print one new line back tab new line print string out of tab new line back tab new line print string complete"
 
 lines = [x.strip() for x in TEXT.split("new line")]
 
