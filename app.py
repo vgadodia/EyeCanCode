@@ -8,7 +8,7 @@ CODE = []
 def index():
     return render_template("index.html", code=CODE)
 
-@app.route('/displayText/<string:code>', methods=["POST", "GET"])
+@app.route('/<string:code>', methods=["POST", "GET"])
 def display(code):
     global CODE 
     CODE.append(code)
