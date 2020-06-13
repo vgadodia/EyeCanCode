@@ -1,6 +1,6 @@
 TEXT = "hello equals five new line print string five new line print hello new line for i in range(10) new line print i"
 
-TEXT = "x equals 5 new line print x * x"
+TEXT = "function square arguments n new line print n * n new line back tab new line call square arguments 4"
 
 lines = [x.strip() for x in TEXT.split("new line")]
 
@@ -25,20 +25,34 @@ for i in range(len(lines)):
             lines[i] = "\t"*addTab + "print(" + str(word_to_num[words[1]]) + ")"
         except:
             lines[i] = "\t"*addTab + "print(" + " ".join(words[1:]) + ")"
-    elif words[1] == "equals" and words[2] == "string":
+    elif (words[1] == "equals" or words[1] == "=") and words[2] == "string":
         lines[i] = "\t"*addTab + words[0] + " = " + "'" + ' '.join(words[3:]) + "'"
-    elif words[1] == "equals":
+    elif (words[1] == "equals" or words[1] == "=") and words[2] == "list":
+        lines[i] = "\t"*addTab + words[0] + " = ["
+        j = 3
+        while j < len(words):
+            if words[j] == 'string':
+                lines[i] += "'" + words[j+1] + "', "
+                j += 2
+            else:
+                # print(int(words[i]))
+                lines[i] += words[j] + ", "
+                # print("here")
+                j += 1
+        lines[i] = lines[i][:-2] + "]"
+
+    elif words[1] == "equals" or words[1] == "=":
         try:
             lines[i] = "\t"*addTab + words[0] + \
                 " = " + str(word_to_num[words[2]])
         except:
             lines[i] = "\t"*addTab + words[0] + " = " + " ".join(words[2:])
-    elif words[0] == "if" and words[2] == "equals" and words[3] == "string":
+    elif words[0] == "if" and (words[2] == "equals" or words[2] == "=") and words[3] == "string":
         words[2] = "=="
         lines[i] = "\t"*addTab + " ".join(words[:3]) + " '" + ' '.join(words[4:]) + "'" + ":"
         addTab +=1
 
-    elif words[0] == "if" and words[2] == "equals":
+    elif words[0] == "if" and (words[2] == "equals" or words[2] == "="):
         words[2] = "=="
         lines[i] = "\t"*addTab + " ".join(words) + ":"
         addTab +=1
@@ -48,6 +62,22 @@ for i in range(len(lines)):
     elif words[0] == "for":
         lines[i] = "\t"*addTab + " ".join(words) + ":"
         addTab += 1
+    elif words[0] == "function" and len(words) == 2:
+        lines[i] = "\t"*addTab + "def " + words[1] +  "()" + ":"
+        addTab += 1
+    elif words[0] == "function" and len(words) > 2:
+        lines[i] = "\t"*addTab + "def " + words[1] +  "("
+        for j in range(3, len(words)):
+            lines[i] += words[j] + ", "
+        lines[i] = lines[i][:-2] + "):"
+        addTab += 1
+    elif words[0] == "call" and len(words) == 2:
+        lines[i] = "\t"*addTab + words[1] +  "()"
+    elif words[0] == "call" and len(words) > 2:
+        lines[i] = "\t"*addTab + words[1] +  "("
+        for j in range(3, len(words)):
+            lines[i] += words[j] + ", "
+        lines[i] = lines[i][:-2] + ")"
 
 
 # print("\n".join(lines))

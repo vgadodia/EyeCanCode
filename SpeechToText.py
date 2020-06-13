@@ -23,7 +23,7 @@ while(1):
             MyText = r.recognize_google(audio2) 
             MyText = MyText.lower() 
 
-            if MyText == "finish code":
+            if MyText == "run code":
                 break
 
             print(MyText) 
@@ -73,7 +73,7 @@ while(1):
     except: 
         pass
 
-print(lines)
+# print(lines)
 SpeakText("Done")
 
 
@@ -87,4 +87,4 @@ print("\n\n\nPARSING YOUR CODE\n\n\n")
 try:
     exec(toParse)
 except:
-    print("There was an error processing your code")
+    print("There was an error running your code")
