@@ -1,4 +1,4 @@
-TEXT = "print string words new line x equals one new line if cool equals cool new line print string cool new line if cool equals cooler new line print one new line back tab new line print string out of tab new line back tab new line print string complete"
+TEXT = "hello equals five new line print string five new line print hello new line for i in range(10) new line print i"
 
 TEXT = "x equals 5 new line print x * x"
 
