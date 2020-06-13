@@ -38,11 +38,15 @@
         color: black;
         padding-right: 3px;
         font-size: 20px;
+        font-family: monospace;
+        font-weight:400;
     }
 
     .interim {
         color: gray;
         font-size: 20px;
+        font-family: monospace;
+        font-weight:400;
     }
 
     .info {
@@ -71,21 +75,25 @@
     }
 
     #results {
-        font-size: 14px;
+        font-size: 20px;
         font-weight: bold;
-        border: 1px solid #ddd;
+        border: 2px solid #ddd;
         padding: 15px;
         text-align: left;
         min-height: 150px;
+        font-family: monospace;
+        font-weight:500;
     }
 
     #run {
-        font-size: 14px;
+        font-size: 20px;
         font-weight: bold;
-        border: 1px solid #ddd;
-        padding: 15px;
+        border: 2px solid #ddd;
+        padding: 5px;
         text-align: left;
         min-height: 500px;
+        font-family: monospace;
+        font-weight:400;
     }
 
     #start_button {
@@ -147,6 +155,14 @@
       </div>
     </div>
 
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="section-title section-black">
+            <h3 style="margin-bottom: -100px;">Speech</h3>
+            <!-- <p>We designed and tested prototypes that helped identify pain points in the account creation process. Together, we shaped the new standard.</p> -->
+          </div>
+        </div>
+    </div>
   <div id="info">
       <p id="info_start">Click on the microphone icon and begin speaking.</p>
       <p id="info_speak_now">Speak now.</p>
@@ -174,13 +190,46 @@
       <span id="interim_span" class="interim"></span>
       <p>
   </div>
-  <br><Br>
-<div id="run">
-    <!-- {% for para in code %}
-    <p>{{para}}</p>
-    {% endfor %} -->
-    <p id="result_code"></p>
+  <br><br>
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="section-title section-black">
+            <h3 style="margin-top: 30px;margin-bottom: -100px;">Python Code</h3>
+            <!-- <p>We designed and tested prototypes that helped identify pain points in the account creation process. Together, we shaped the new standard.</p> -->
+          </div>
+        </div>
+    </div>
 
+<div class="container">
+    <div class="row">
+        <div class="col-1">
+                <p style="font-family:monospace;font-weight:400;font-size:17px;margin-top:8px;margin-left:65px;">1<br>
+                                                                                                  2<br>
+                                                                                                  3<br>
+                                                                                                  4<br>
+                                                                                                  5<br>
+                                                                                                  6<br>
+                                                                                                  7<br>
+                                                                                                  8<br>
+                                                                                                  9<br>
+                                                                                                  10<br>
+                                                                                                  11<br>
+                                                                                                  12<br>
+                                                                                                  13<br>
+                                                                                                  14<br>
+                                                                                                  15<br>
+                                                                                                  16<br>
+                                                                                                  17<br></p>
+        </div>
+        <div class="col-11">
+            <div id="run">
+                <!-- {% for para in code %}
+                <p>{{para}}</p>
+                {% endfor %} -->
+                <p style="font-family:monospace;font-weight:400;" id="result_code"></p>
+            </div>
+        </div>
+    </div>
 </div>
 
   <div class="center">
