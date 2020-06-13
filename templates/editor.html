@@ -175,12 +175,13 @@
       <p>
   </div>
   <br><Br>
-  <div id="run">
-      {% for para in code %}
-      <p>{{para}}</p>
-      {% endfor %}
-  
-  </div>
+<div id="results">
+    <!-- {% for para in code %}
+    <p>{{para}}</p>
+    {% endfor %} -->
+    <p id="result_code"></p>
+
+</div>
 
   <div class="center">
       <p>
@@ -356,6 +357,7 @@
             "five": 5, "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10
         }
     let addTab = 0;
+    let lines = [];
     if (!('webkitSpeechRecognition' in window)) {
         upgrade();
     } else {
@@ -435,17 +437,20 @@
                     } else if (words[0] == "print" && words[1] == "string") {
                         words.shift();
                         words.shift();
-                        str += "print(\"" + words.join(" ") + "\")"
+                        str += "print(\"" + words.join(" ") + "\")";
                     } else if (words[0] == "print") {
                         if (word_to_num[words[1]]) {
                             str += "print(" + (word_to_num[words[1]]) + ")";
                         } else {
                             words.shift();
-                            str += "print(" + words.join(" ") + ")"
+                            str += "print(" + words.join(" ") + ")";
                         }
+                    } else {
+                        str += words.join(" ");
                     }
                     console.log(str);
-                    document.getElementById("result_code").innerHTML = str;
+                    lines.push(str);
+                    document.getElementById("result_code").innerHTML = lines.join("\n");
                     
                     // var xhttp = new XMLHttpRequest();
                     // xhttp.onreadystatechange = function () {
@@ -500,8 +505,8 @@
             recognizing = false;
             recognition.stop();
         }
-        copy_button.style.display = 'none';
-        copy_info.style.display = 'inline-block';
+        // copy_button.style.display = 'none';
+        // copy_info.style.display = 'inline-block';
         showInfo('');
     }
 
@@ -513,8 +518,8 @@
         } else {
             createEmail();
         }
-        email_button.style.display = 'none';
-        email_info.style.display = 'inline-block';
+        // email_button.style.display = 'none';
+        // email_info.style.display = 'inline-block';
         showInfo('');
     }
 
@@ -554,10 +559,10 @@
             return;
         }
         current_style = style;
-        copy_button.style.display = style;
-        email_button.style.display = style;
-        copy_info.style.display = 'none';
-        email_info.style.display = 'none';
+        // copy_button.style.display = style;
+        // email_button.style.display = style;
+        // copy_info.style.display = 'none';
+        // email_info.style.display = 'none';
     }
 </script>
 </body>

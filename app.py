@@ -24,6 +24,15 @@ def index1():
 # def handle_message(message):
 #     print('received message: ' + message)
 
+
+@app.route('/editor.html')
+def edit():
+    return render_template("editor.html")
+
+@app.route('/academy.html')
+def aca():
+    return render_template("academy.html")
+
 @app.route('/<string:code>', methods=["POST", "GET"])
 def display(code):
     global CODE 
