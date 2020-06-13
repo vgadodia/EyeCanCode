@@ -53,5 +53,14 @@ if (words[0] == "back" && words[1] == "tab") {
         words.shift();
         str+=first + " = " + words.join(" ");
     }
-} else if (words[0] == "if" && )
+} else if (words[0] == "if" && (words[2] == "equals" || words[2] == "=")) {
+    words[2] = "==";
+    str += words.join(" ") + ":";
+}
+
+
+    elif words[0] == "if" and(words[2] == "equals" or words[2] == "="):
+words[2] = "=="
+lines[i] = "\t" * addTab + " ".join(words) + ":"
+addTab += 1
 console.log(str);

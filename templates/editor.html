@@ -437,20 +437,52 @@
                     } else if (words[0] == "print" && words[1] == "string") {
                         words.shift();
                         words.shift();
-                        str += "print(\"" + words.join(" ") + "\")";
+                        str += "print(\"" + words.join(" ") + "\")"
                     } else if (words[0] == "print") {
                         if (word_to_num[words[1]]) {
                             str += "print(" + (word_to_num[words[1]]) + ")";
                         } else {
                             words.shift();
-                            str += "print(" + words.join(" ") + ")";
+                            str += "print(" + words.join(" ") + ")"
                         }
+                    } else if ((words[1] == "equals" || words[1] == "=") && words[2] == "string") {
+                        let first = words.shift();
+                        words.shift();
+                        words.shift();
+                        str += first + " = " + "'" + words.join(" ") + "'";
+                    } else if ((words[1] == "equals" || words[1] == "=") && words[2] == "list") {
+                        let first = words.shift();
+                        words.shift();
+                        str += first + " = [";
+                        let j = 1;
+                        while (j < words.length) {
+                            if (words[j] == 'string') {
+                                str += "'" + words[j + 1] + "', ";
+                                j += 2;
+                            }
+                            else {
+                                str += words[j] + ", ";
+                                j++;
+                            }
+                        }
+                        str = str.substring(0, str.length - 2) + "]";
+                    } else if (words[1] == "equals" || words[1] == "=") {
+                        if (word_to_num[words[2]]) {
+                            str += words[0] + " = " + word_to_num[words[2]];
+                        } else {
+                            let first = words.shift();
+                            words.shift();
+                            str += first + " = " + words.join(" ");
+                        }
+                    } else if (words[0] == "if" && (words[2] == "equals" || words[2] == "=")) {
+                        words[2] = "==";
+                        str += words.join(" ") + ":";
                     } else {
                         str += words.join(" ");
                     }
                     console.log(str);
                     lines.push(str);
-                    document.getElementById("result_code").innerHTML = lines.join("\n");
+                    document.getElementById("result_code").innerHTML = lines.join("<br>");
                     
                     // var xhttp = new XMLHttpRequest();
                     // xhttp.onreadystatechange = function () {
