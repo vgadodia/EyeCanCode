@@ -81,3 +81,9 @@ SpeakText("Done")
 toParse = "\n".join([x for x in lines if x != ""])
 
 print(toParse)
+
+print("\n\n\nPARSING YOUR CODE\n\n\n")
+try:
+    eval(toParse)
+except:
+    print("There was an error processing your code")

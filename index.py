@@ -43,3 +43,6 @@ for i in range(len(lines)):
 toParse = "\n".join([x for x in lines if x != ""])
 
 print(toParse)
+
+
+eval(toParse)
