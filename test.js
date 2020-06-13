@@ -51,7 +51,7 @@ if (words[0] == "back" && words[1] == "tab") {
     } else {
         let first = words.shift();
         words.shift();
-        str+=first + " = "
+        str+=first + " = " + words.join(" ");
     }
-}
+} else if (words[0] == "if" && )
 console.log(str);

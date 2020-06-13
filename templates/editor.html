@@ -7,17 +7,17 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title></title>
   <!-- Plugins CSS -->
-  <link rel="stylesheet" href="./plugins/bootstrap-4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="./plugins/meanmenu/meanmenu.css">
-  <link rel="stylesheet" href="./plugins/slick-1.8.1/slick.css">
-  <link rel="stylesheet" href="./plugins/fancybox-master/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="./plugins/aos-animation/aos.css">
+  <link rel="stylesheet" href="{{url_for('static', filename='plugins/bootstrap-4.3.1/css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='plugins/meanmenu/meanmenu.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='plugins/slick-1.8.1/slick.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='plugins/fancybox-master/jquery.fancybox.min.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='plugins/aos-animation/aos.css')}}">
   <!-- fonts -->
-  <link rel="stylesheet" href="./fonts/ep-icon-fonts/css/style.css">
-  <link rel="stylesheet" href="./fonts/fontawesome-5/css/all.min.css">
+  <link rel="stylesheet" href="{{url_for('static', filename='fonts/ep-icon-fonts/css/style.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='fonts/fontawesome-5/css/all.min.css')}}">
   <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="./css/settings.css">
-  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/settings.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
   <style>
     * {
         font-family: Verdana, Arial, sans-serif;
@@ -105,7 +105,7 @@
                 <div class="col-sm-3 col-6 col-lg-2 col-xl-2 order-lg-1">
                   <!-- Brand Logo -->
                     <div class="brand-logo">
-                        <a href=""><img src="image/main-logo.png" alt="" /></a>
+                        <a href=""><img src="{{url_for('static', filename='image/main-logo.png')}}" alt="" /></a>
                     </div>
                 </div>
                 <div class="col-sm-8 col-lg-2 col-xl-2 d-none d-sm-block order-lg-3">
@@ -128,7 +128,7 @@
                 </div>
             </div>
         </div>
-        <div class="shape-holder header-shape" data-aos="fade-down" data-aos-once="true"><img src="image/header-shape.svg" alt=""></div>
+        <div class="shape-holder header-shape" data-aos="fade-down" data-aos-once="true"><img src="{{url_for('static', filename='image/header-shape.svg')}}" alt=""></div>
   </header>
 
 
@@ -246,22 +246,22 @@
           </div>
         </div>
   </div>
-  <div class="shape-holder footer-shape-2" data-aos="zoom-in-right" data-aos-once="true"><img src="image/footer-shape.svg" alt=""></div>
+  <div class="shape-holder footer-shape-2" data-aos="zoom-in-right" data-aos-once="true"><img src="{{url_for('static', filename='image/footer-shape.svg')}}" alt=""></div>
 </div>
 </div>
-  <!-- Vendor JS-->
-  <script src="./plugins/jquery/jquery.min.js"></script>
-  <script src="./plugins/jquery/jquery-migrate.min.js"></script>
-  <script src="./plugins/bootstrap-4.3.1/js/bootstrap.bundle.js"></script>
+<!-- Vendor JS-->
+<script src="{{url_for('static', filename='plugins/jquery/jquery.min.js')}}"></script>
+<script src="{{url_for('static', filename='plugins/jquery/jquery-migrate.min.js')}}"></script>
+<script src="{{url_for('static', filename='plugins/bootstrap-4.3.1/js/bootstrap.bundle.js')}}"></script>
 
-  <!-- Plugins JS -->
-  <script src="./plugins/meanmenu/jquery.meanmenu.js"></script>
-  <script src="./plugins/slick-1.8.1/slick.min.js"></script>
-  <script src="./plugins/fancybox-master/jquery.fancybox.min.js"></script>
-  <script src="./plugins/aos-animation/aos.js"></script>
+<!-- Plugins JS -->
+<script src="{{url_for('static', filename='plugins/meanmenu/jquery.meanmenu.js')}}"></script>
+<script src="{{url_for('static', filename='plugins/slick-1.8.1/slick.min.js')}}"></script>
+<script src="{{url_for('static', filename='plugins/fancybox-master/jquery.fancybox.min.js')}}"></script>
+<script src="{{url_for('static', filename='plugins/aos-animation/aos.js')}}"></script>
 
-  <!-- Custom JS -->
-  <script src="./js/active.js"></script>
+<!-- Custom JS -->
+<script src="{{url_for('static', filename='js/active.js')}}"></script>
   <script>
     var langs =
         [['Afrikaans', ['af-ZA']],
@@ -351,6 +351,11 @@
     var recognizing = false;
     var ignore_onend;
     var start_timestamp;
+    const word_to_num = {
+            "one": 1, "two": 2, "three": 3, "four": 4,
+            "five": 5, "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10
+        }
+    let addTab = 0;
     if (!('webkitSpeechRecognition' in window)) {
         upgrade();
     } else {
@@ -414,12 +419,34 @@
             for (var i = event.resultIndex; i < event.results.length; ++i) {
                 if (event.results[i].isFinal) {
                     final_transcript += event.results[i][0].transcript;
-                    console.log(event.results[i][0].transcript);
-                    var formData = new FormData();
-                    formData.append("name", "Murdock");
-                    var req = new XMLHttpRequest();
-                    req.open("POST", "/" + event.results[i][0].transcript);
-                    req.send(formData);
+                    // console.log(event.results[i][0].transcript);
+                    // var formData = new FormData();
+                    // formData.append("name", "Murdock");
+                    // var req = new XMLHttpRequest();
+                    // req.open("POST", "/" + event.results[i][0].transcript);
+                    // req.send(formData);
+                    let words = event.results[i][0].transcript.split(" ");
+
+                    let str = "";
+                    for (let i = 0; i < addTab; ++i) str += "\t";
+
+                    if (words[0] == "back" && words[1] == "tab") {
+                        addTab--;
+                    } else if (words[0] == "print" && words[1] == "string") {
+                        words.shift();
+                        words.shift();
+                        str += "print(\"" + words.join(" ") + "\")"
+                    } else if (words[0] == "print") {
+                        if (word_to_num[words[1]]) {
+                            str += "print(" + (word_to_num[words[1]]) + ")";
+                        } else {
+                            words.shift();
+                            str += "print(" + words.join(" ") + ")"
+                        }
+                    }
+                    console.log(str);
+                    document.getElementById("result_code").innerHTML = str;
+                    
                     // var xhttp = new XMLHttpRequest();
                     // xhttp.onreadystatechange = function () {
                     //     if (this.readyState == 4 && this.status == 200) {

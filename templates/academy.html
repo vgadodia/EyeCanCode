@@ -7,17 +7,17 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title></title>
   <!-- Plugins CSS -->
-  <link rel="stylesheet" href="./plugins/bootstrap-4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="./plugins/meanmenu/meanmenu.css">
-  <link rel="stylesheet" href="./plugins/slick-1.8.1/slick.css">
-  <link rel="stylesheet" href="./plugins/fancybox-master/jquery.fancybox.min.css">
-  <link rel="stylesheet" href="./plugins/aos-animation/aos.css">
+  <link rel="stylesheet" href="{{url_for('static', filename='plugins/bootstrap-4.3.1/css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='plugins/meanmenu/meanmenu.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='plugins/slick-1.8.1/slick.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='plugins/fancybox-master/jquery.fancybox.min.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='plugins/aos-animation/aos.css')}}">
   <!-- fonts -->
-  <link rel="stylesheet" href="./fonts/ep-icon-fonts/css/style.css">
-  <link rel="stylesheet" href="./fonts/fontawesome-5/css/all.min.css">
+  <link rel="stylesheet" href="{{url_for('static', filename='fonts/ep-icon-fonts/css/style.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='fonts/fontawesome-5/css/all.min.css')}}">
   <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="./css/settings.css">
-  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/settings.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
   <style>
     * {
         font-family: Verdana, Arial, sans-serif;
@@ -120,7 +120,7 @@
                 <div class="col-sm-3 col-6 col-lg-2 col-xl-2 order-lg-1">
                   <!-- Brand Logo -->
                     <div class="brand-logo">
-                        <a href=""><img src="image/main-logo.png" alt="" /></a>
+                        <a href=""><img src="{{url_for('static', filename='image/main-logo.png')}}" alt="" /></a>
                     </div>
                 </div>
                 <div class="col-sm-8 col-lg-2 col-xl-2 d-none d-sm-block order-lg-3">
@@ -136,14 +136,14 @@
 
                             <li class="menu-item "><a href="editor.html">Editor</a></li>
                     
-                            <li class="menu-item"><a href="academy">Academy</a></li>
+                            <li class="menu-item"><a href="academy.html">Academy</a></li>
                             </ul>
                     </div>
                     <div class="mobile-menu"></div>
                 </div>
             </div>
         </div>
-        <div class="shape-holder header-shape" data-aos="fade-down" data-aos-once="true"><img src="image/header-shape.svg" alt=""></div>
+        <div class="shape-holder header-shape" data-aos="fade-down" data-aos-once="true"><img src="{{url_for('static', filename='image/header-shape.svg'}})" alt=""></div>
   </header>
 
 
@@ -178,19 +178,19 @@
         <div class="hero-media">
           <img src="image/hero.png" alt="">
           <a class="video-play-trigger" data-fancybox href="https://www.youtube.com/watch?v=_sI_Ps7JSEk"><i class="icon icon-triangle-right-17-2"></i></a>
-          <div class="media-shape animate-spin"><img src="image/media-shape.png" alt=""></div>
+          <div class="media-shape animate-spin"><img src="{{url_for('static', filename='image/media-shape.png')}}" alt=""></div>
         </div>
       </div>
     </div>
   </div>
-  <div class="shape-holder hero-shape" data-aos="fade-right" data-aos-once="true"><img src="image/hero-orange-shape.svg" alt=""></div>
+  <div class="shape-holder hero-shape" data-aos="fade-right" data-aos-once="true"><img src="{{url_for('static', filename='image/hero-orange-shape.svg')}}" alt=""></div>
 </div>
 
 
 <!-- Course section -->
 <section class="course-section position-relative">
   <div class="shape-holder">
-    <img src="./image/section-2-shape-bg.svg" alt="">
+    <img src="{{url_for('static', filename='image/section-2-shape-bg.svg')}}" alt="">
   </div>
 
 
@@ -209,7 +209,7 @@
         <h4  id="intro" style="padding-top: 50px;">Introduction to Python</h4>
         <p>Press the "Hear Audio" button to hear the syntax. Then, click the mic image and repeat what was said.</p>
         <br><br>
-        <audio id="sound1" src="printhello.m4a" preload="auto"></audio>
+        <audio id="sound1" src="{{url_for('static', filename='printhello.m4a')}}" preload="auto"></audio>
         <button class="speak-button" onclick="document.getElementById('sound1').play();">Hear Audio</button>
     </div>
     </div>
@@ -315,22 +315,22 @@
           </div>
         </div>
   </div>
-  <div class="shape-holder footer-shape-2" data-aos="zoom-in-right" data-aos-once="true"><img src="image/footer-shape.svg" alt=""></div>
+  <div class="shape-holder footer-shape-2" data-aos="zoom-in-right" data-aos-once="true"><img src="{{url_for('static', filename='image/footer-shape.svg')}}" alt=""></div>
 </div>
 </div>
   <!-- Vendor JS-->
-  <script src="./plugins/jquery/jquery.min.js"></script>
-  <script src="./plugins/jquery/jquery-migrate.min.js"></script>
-  <script src="./plugins/bootstrap-4.3.1/js/bootstrap.bundle.js"></script>
+  <script src="{{url_for('static', filename='plugins/jquery/jquery.min.js')}}"></script>
+  <script src="{{url_for('static', filename='plugins/jquery/jquery-migrate.min.js')}}"></script>
+  <script src="{{url_for('static', filename='plugins/bootstrap-4.3.1/js/bootstrap.bundle.js')}}"></script>
 
   <!-- Plugins JS -->
-  <script src="./plugins/meanmenu/jquery.meanmenu.js"></script>
-  <script src="./plugins/slick-1.8.1/slick.min.js"></script>
-  <script src="./plugins/fancybox-master/jquery.fancybox.min.js"></script>
-  <script src="./plugins/aos-animation/aos.js"></script>
+  <script src="{{url_for('static', filename='plugins/meanmenu/jquery.meanmenu.js')}}"></script>
+  <script src="{{url_for('static', filename='plugins/slick-1.8.1/slick.min.js')}}"></script>
+  <script src="{{url_for('static', filename='plugins/fancybox-master/jquery.fancybox.min.js')}}"></script>
+  <script src="{{url_for('static', filename='plugins/aos-animation/aos.js')}}"></script>
 
   <!-- Custom JS -->
-  <script src="./js/active.js"></script>
+  <script src="{{url_for('static', filename='js/active.js')}}"></script>
   <script>
     var langs =
         [['Afrikaans', ['af-ZA']],

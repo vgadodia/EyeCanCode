@@ -1,461 +1,425 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<title>Web Speech API Demo</title>
-<style>
-    * {
-        font-family: Verdana, Arial, sans-serif;
-    }
+<html lang="en">
 
-    a:link {
-        color: #000;
-        text-decoration: none;
-    }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title></title>
+  <!-- Plugins CSS -->
+  <link rel="stylesheet" href="{{url_for('static', filename='plugins/bootstrap-4.3.1/css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='plugins/meanmenu/meanmenu.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='plugins/slick-1.8.1/slick.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='plugins/fancybox-master/jquery.fancybox.min.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='plugins/aos-animation/aos.css')}}">
+  <!-- fonts -->
+  <link rel="stylesheet" href="{{url_for('static', filename='fonts/ep-icon-fonts/css/style.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='fonts/fontawesome-5/css/all.min.css')}}">
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="{{url_for('static', filename='css/settings.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+</head>
 
-    a:visited {
-        color: #000;
-    }
+<body >
+<div class="site-wrapper">
+<!-- Header Starts -->
+  <header class="site-header position-relative">
+        <div class="container">
+            <div class="row justify-content-center align-items-center position-relative">
+                <div class="col-sm-3 col-6 col-lg-2 col-xl-2 order-lg-1">
+                  <!-- Brand Logo -->
+                    <div class="brand-logo">
+                        <a href=""><img src="{{url_for('static', filename='image/main-logo.png')}}" alt="" /></a>
+                    </div>
+                </div>
+                <div class="col-sm-8 col-lg-2 col-xl-2 d-none d-sm-block order-lg-3">
+                    <div class="header-btns justify-content-end">
+                        <a href="#" class="btn btn-link">Sign In</a>
+                    </div>
+                </div>
+                <!-- Menu Block -->
+                <div class="col-sm-1 col-6 col-lg-6 col-xl-6 offset-lg-2  position-static order-lg-2">
+                    <div class="main-navigation">
+                        <ul class="main-menu">
+                            <li class="menu-item "><a href="index.html">Home</a></li>
 
-    a:hover {
-        color: #33F;
-    }
-
-    .button {
-        background: -webkit-linear-gradient(top, #008dfd 0, #0370ea 100%);
-        border: 1px solid #076bd2;
-        border-radius: 3px;
-        color: #fff;
-        display: none;
-        font-size: 13px;
-        font-weight: bold;
-        line-height: 1.3;
-        padding: 8px 25px;
-        text-align: center;
-        text-shadow: 1px 1px 1px #076bd2;
-        letter-spacing: normal;
-    }
-
-    .center {
-        padding: 10px;
-        text-align: center;
-    }
-
-    .final {
-        color: black;
-        padding-right: 3px;
-    }
-
-    .interim {
-        color: gray;
-    }
-
-    .info {
-        font-size: 14px;
-        text-align: center;
-        color: #777;
-        display: none;
-    }
-
-    .right {
-        float: right;
-    }
-
-    .sidebyside {
-        display: inline-block;
-        width: 45%;
-        min-height: 40px;
-        text-align: left;
-        vertical-align: top;
-    }
-
-    #headline {
-        font-size: 40px;
-        font-weight: 300;
-    }
-
-    #info {
-        font-size: 20px;
-        text-align: center;
-        color: #777;
-        visibility: hidden;
-    }
-
-    #results {
-        font-size: 14px;
-        font-weight: bold;
-        border: 1px solid #ddd;
-        padding: 15px;
-        text-align: left;
-        min-height: 150px;
-    }
-
-    #start_button {
-        border: 0;
-        background-color: transparent;
-        padding: 0;
-    }
-</style>
-<h1 class="center" id="headline">
-    <a href="http://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html">
-        Web Speech API</a> Demonstration</h1>
-<div id="info">
-    <p id="info_start">Click on the microphone icon and begin speaking.</p>
-    <p id="info_speak_now">Speak now.</p>
-    <p id="info_no_speech">No speech was detected. You may need to adjust your
-        <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
-            microphone settings</a>.</p>
-    <p id="info_no_microphone" style="display:none">
-        No microphone was found. Ensure that a microphone is installed and that
-        <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
-            microphone settings</a> are configured correctly.</p>
-    <p id="info_allow">Click the "Allow" button above to enable your microphone.</p>
-    <p id="info_denied">Permission to use microphone was denied.</p>
-    <p id="info_blocked">Permission to use microphone is blocked. To change,
-        go to chrome://settings/contentExceptions#media-stream</p>
-    <p id="info_upgrade">Web Speech API is not supported by this browser.
-        Upgrade to <a href="//www.google.com/chrome">Chrome</a>
-        version 25 or later.</p>
-</div>
-<div class="right">
-    <button id="start_button" onclick="startButton(event)">
-        <img id="start_img" src='{{url_for("static", filename="mic.gif")}}' alt="Start"></button>
-</div>
-<div id="results">
-    <span id="final_span" class="final"></span>
-    <span id="interim_span" class="interim"></span>
-    <p>
-</div>
-<br><Br>
-<div id="results">
-    <!-- {% for para in code %}
-    <p>{{para}}</p>
-    {% endfor %} -->
-    <p id = "result_code"></p>
-
-</div>
-<div class="center">
-    <div class="sidebyside" style="text-align:right">
-        <button id="copy_button" class="button" onclick="copyButton()">
-            Copy and Paste</button>
-        <div id="copy_info" class="info">
-            Press Control-C to copy text.<br>(Command-C on Mac.)
-        </div>
-    </div>
-    <div class="sidebyside">
-        <button id="email_button" class="button" onclick="emailButton()">
-            Create Email</button>
-        <div id="email_info" class="info">
-            Text sent to default email application.<br>
-            (See chrome://settings/handlers to change.)
-        </div>
-    </div>
-    <p>
-    <div id="div_language">
-        <select id="select_language" onchange="updateCountry()"></select>
-        &nbsp;&nbsp;
-        <select id="select_dialect"></select>
-    </div>
-</div>
-<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"
-    integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
-<script>
-    var langs =
-        [['Afrikaans', ['af-ZA']],
-        ['Bahasa Indonesia', ['id-ID']],
-        ['Bahasa Melayu', ['ms-MY']],
-        ['Català', ['ca-ES']],
-        ['Čeština', ['cs-CZ']],
-        ['Deutsch', ['de-DE']],
-        ['English', ['en-AU', 'Australia'],
-            ['en-CA', 'Canada'],
-            ['en-IN', 'India'],
-            ['en-NZ', 'New Zealand'],
-            ['en-ZA', 'South Africa'],
-            ['en-GB', 'United Kingdom'],
-            ['en-US', 'United States']],
-        ['Español', ['es-AR', 'Argentina'],
-            ['es-BO', 'Bolivia'],
-            ['es-CL', 'Chile'],
-            ['es-CO', 'Colombia'],
-            ['es-CR', 'Costa Rica'],
-            ['es-EC', 'Ecuador'],
-            ['es-SV', 'El Salvador'],
-            ['es-ES', 'España'],
-            ['es-US', 'Estados Unidos'],
-            ['es-GT', 'Guatemala'],
-            ['es-HN', 'Honduras'],
-            ['es-MX', 'México'],
-            ['es-NI', 'Nicaragua'],
-            ['es-PA', 'Panamá'],
-            ['es-PY', 'Paraguay'],
-            ['es-PE', 'Perú'],
-            ['es-PR', 'Puerto Rico'],
-            ['es-DO', 'República Dominicana'],
-            ['es-UY', 'Uruguay'],
-            ['es-VE', 'Venezuela']],
-        ['Euskara', ['eu-ES']],
-        ['Français', ['fr-FR']],
-        ['Galego', ['gl-ES']],
-        ['Hrvatski', ['hr_HR']],
-        ['IsiZulu', ['zu-ZA']],
-        ['Íslenska', ['is-IS']],
-        ['Italiano', ['it-IT', 'Italia'],
-            ['it-CH', 'Svizzera']],
-        ['Magyar', ['hu-HU']],
-        ['Nederlands', ['nl-NL']],
-        ['Norsk bokmål', ['nb-NO']],
-        ['Polski', ['pl-PL']],
-        ['Português', ['pt-BR', 'Brasil'],
-            ['pt-PT', 'Portugal']],
-        ['Română', ['ro-RO']],
-        ['Slovenčina', ['sk-SK']],
-        ['Suomi', ['fi-FI']],
-        ['Svenska', ['sv-SE']],
-        ['Türkçe', ['tr-TR']],
-        ['български', ['bg-BG']],
-        ['Pусский', ['ru-RU']],
-        ['Српски', ['sr-RS']],
-        ['한국어', ['ko-KR']],
-        ['中文', ['cmn-Hans-CN', '普通话 (中国大陆)'],
-            ['cmn-Hans-HK', '普通话 (香港)'],
-            ['cmn-Hant-TW', '中文 (台灣)'],
-            ['yue-Hant-HK', '粵語 (香港)']],
-        ['日本語', ['ja-JP']],
-        ['Lingua latīna', ['la']]];
-
-    for (var i = 0; i < langs.length; i++) {
-        select_language.options[i] = new Option(langs[i][0], i);
-    }
-    select_language.selectedIndex = 6;
-    updateCountry();
-    select_dialect.selectedIndex = 6;
-    showInfo('info_start');
-
-    function updateCountry() {
-        for (var i = select_dialect.options.length - 1; i >= 0; i--) {
-            select_dialect.remove(i);
-        }
-        var list = langs[select_language.selectedIndex];
-        for (var i = 1; i < list.length; i++) {
-            select_dialect.options.add(new Option(list[i][1], list[i][0]));
-        }
-        select_dialect.style.visibility = list[1].length == 1 ? 'hidden' : 'visible';
-    }
-
-    var create_email = false;
-    var final_transcript = '';
-    var recognizing = false;
-    var ignore_onend;
-    var start_timestamp;
-    const word_to_num = {
-            "one": 1, "two": 2, "three": 3, "four": 4,
-            "five": 5, "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10
-    }
-    let addTab = 0;
-    if (!('webkitSpeechRecognition' in window)) {
-        upgrade();
-    } else {
-        start_button.style.display = 'inline-block';
-        var recognition = new webkitSpeechRecognition();
-        recognition.continuous = true;
-        recognition.interimResults = true;
-
-        recognition.onstart = function () {
-            recognizing = true;
-            showInfo('info_speak_now');
-            start_img.src = '{{url_for("static", filename="mic-animate.gif")}}';
-        };
-
-        recognition.onerror = function (event) {
-            if (event.error == 'no-speech') {
-                start_img.src = '{{url_for("static", filename="mic.gif")}}';
-                showInfo('info_no_speech');
-                ignore_onend = true;
-            }
-            if (event.error == 'audio-capture') {
-                start_img.src = '{{url_for("static", filename="mic.gif")}}';
-                showInfo('info_no_microphone');
-                ignore_onend = true;
-            }
-            if (event.error == 'not-allowed') {
-                if (event.timeStamp - start_timestamp < 100) {
-                    showInfo('info_blocked');
-                } else {
-                    showInfo('info_denied');
-                }
-                ignore_onend = true;
-            }
-        };
-
-        recognition.onend = function () {
-            recognizing = false;
-            if (ignore_onend) {
-                return;
-            }
-            start_img.src = '{{url_for("static", filename="mic.gif")}}';
-            if (!final_transcript) {
-                showInfo('info_start');
-                return;
-            }
-            showInfo('');
-            if (window.getSelection) {
-                window.getSelection().removeAllRanges();
-                var range = document.createRange();
-                range.selectNode(document.getElementById('final_span'));
-                window.getSelection().addRange(range);
-            }
-            if (create_email) {
-                create_email = false;
-                createEmail();
-            }
-        };
-
-        recognition.onresult = function (event) {
-            var interim_transcript = '';
-            for (var i = event.resultIndex; i < event.results.length; ++i) {
-                if (event.results[i].isFinal) {
-                    final_transcript += event.results[i][0].transcript;
-                    console.log(event.results[i][0].transcript);
-                    let words = event.results[i][0].transcript.split(" ");
-
-                    let str = "";
-                    for (let i = 0; i < addTab; ++i) str += "\t";
-
-                    if (words[0] == "back" && words[1] == "tab") {
-                        addTab--;
-                    } else if (words[0] == "print" && words[1] == "string") {
-                        words.shift();
-                        words.shift();
-                        str += "print(\"" + words.join(" ") + "\")"
-                    } else if (words[0] == "print") {
-                        if (word_to_num[words[1]]) {
-                            str += "print(" + (word_to_num[words[1]]) + ")";
-                        } else {
-                            words.shift();
-                            str += "print(" + words.join(" ") + ")"
-                        }
-                    }
-                    console.log(str);
-                    document.getElementById("result_code").innerHTML = str;
+                            <li class="menu-item "><a href="editor.html">Editor</a></li>
                     
-                    // var formData = new FormData();
-                    // formData.append("code", event.results[i][0].transcript);
-                    // var req = new XMLHttpRequest();
-                    // req.open("POST", "/");
-                    // req.send(formData);
-                    // var socket = io();
-                    // socket.on('connect', function () {
-                    //     socket.emit('my event', { data: 'I\'m connected!' });
-                    // });
-                    // var xhttp = new XMLHttpRequest();
-                    // xhttp.onreadystatechange = function () {
-                    //     if (this.readyState == 4 && this.status == 200) {
-                    //         // Typical action to be performed when the document is ready:
-                    //         // document.getElementById("demo").innerHTML = xhttp.responseText;
-                    //     }
-                    // };
-                    // xhttp.open("POST", "/" + event.results[i][0].transcript, true);
-                    // xhttp.send();
-                } else {
-                    interim_transcript += event.results[i][0].transcript;
-                }
-            }
-            // final_transcript = capitalize(final_transcript);
-            final_span.innerHTML = linebreak(final_transcript);
-            interim_span.innerHTML = linebreak(interim_transcript);
-            if (final_transcript || interim_transcript) {
-                showButtons('inline-block');
-            }
-        };
-    }
+                            <li class="menu-item"><a href="academy.html">Academy</a></li>
+                            </ul>
+                    </div>
+                    <div class="mobile-menu"></div>
+                </div>
+            </div>
+        </div>
+        <div class="shape-holder header-shape" data-aos="fade-down" data-aos-once="true"><img src="image/header-shape.svg" alt=""></div>
+  </header>
 
-    function upgrade() {
-        start_button.style.visibility = 'hidden';
-        showInfo('info_upgrade');
-    }
+<!-- Hero-Area -->
+<div class="hero-area position-relative">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-6 col-lg-6 col-md-7 col-12">
+        <div class="hero-content">
+          <h1>Learn User Centered Design</h1>
+          <p>Create custom landing pages with Shades that convert more visitors than any website—no coding required.</p>
+          <div class="hero-btn"><a href="#" class="btn btn--orange btn--hover-shine">Get Started</a></div>
+          <!-- <div class="rating">
+            <div class="icon">
+              <i class="fas fa-star active"></i>
+              <i class="fas fa-star active"></i>
+              <i class="fas fa-star active"></i>
+              <i class="fas fa-star active"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <span class="text">Trused by over 4,332 students</span>
+          </div> -->
+        </div>
+      </div>
 
-    var two_line = /\n\n/g;
-    var one_line = /\n/g;
-    function linebreak(s) {
-        return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
-    }
+      <div class="col-xl-6 col-lg-6 col-md-5 col-12">
+        <div class="hero-media">
+          <img src="image/hero.png" alt="">
+          <a class="video-play-trigger" data-fancybox href="https://www.youtube.com/watch?v=_sI_Ps7JSEk"><i class="icon icon-triangle-right-17-2"></i></a>
+          <div class="media-shape animate-spin"><img src="{{url_for('static', filename='image/media-shape.png')}}" alt=""></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="shape-holder hero-shape" data-aos="fade-right" data-aos-once="true"><img src="{{url_for('static', filename='image/hero-orange-shape.svg')}}" alt=""></div>
+</div>
 
-    var first_char = /\S/;
-    function capitalize(s) {
-        return s.replace(first_char, function (m) { return m.toUpperCase(); });
-    }
+<!-- Facts Section -->
+<section class="facts-section">
+  <div class="container">
+    <div class="position-relative">
+      <div class="fact-absolute">
+          <div class="row justify-content-center">
+              <div class="col-xl-7 col-lg-8 mb--35  text-center">
+                <span class="fact-text">The #1 coding tool for the visually impaired</span>
+              </div>
+            </div>
+            <div class="row justify-content-center space-db--30">
+                <div class="col-md-6 col-lg-3 mb--30" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
+                        <div class="fact-card" >
+                          <div class="card-content">
+                            <span class="number">Speech</span>
+                            <p class="info">to text code editor</p>
+                          </div>
+                
+                          <div class="card-icon">
+                            <img src="{{url_for('static', filename='image/users-wm.png')}}" alt="">
+                          </div>
+                        </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 mb--30" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" data-aos-delay="200">
+                        <div class="fact-card" >
+                          <div class="card-content">
+                            <span class="number">Free</span>
+                            <p class="info">Python tutorials</p>
+                          </div>
+                
+                          <div class="card-icon">
+                            <img src="{{url_for('static', filename='image/fact-2.png')}}" alt="">
+                          </div>
+                        </div>
+                </div>
+                
+                <!-- <div class="col-md-6 col-lg-3 mb--30" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" data-aos-delay="400">
+                        <div class="fact-card" >
+                          <div class="card-content">
+                            <span class="number">3,493</span>
+                            <p class="info">5 Star Reviews</p>
+                          </div>
+                
+                          <div class="card-icon">
+                            <img src="image/fact-3.png" alt="">
+                          </div>
+                        </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 mb--30" data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" data-aos-delay="600">
+                        <div class="fact-card" >
+                          <div class="card-content">
+                            <span class="number">21k</span>
+                            <p class="info">Questions Solved</p>
+                          </div>
+                
+                          <div class="card-icon">
+                            <img src="image/fact-4.png" alt="">
+                          </div>
+                        </div>
+                </div> -->
+            </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    function createEmail() {
-        var n = final_transcript.indexOf('\n');
-        if (n < 0 || n >= 80) {
-            n = 40 + final_transcript.substring(40).indexOf(' ');
-        }
-        var subject = encodeURI(final_transcript.substring(0, n));
-        var body = encodeURI(final_transcript.substring(n + 1));
-        window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
-    }
 
-    function copyButton() {
-        if (recognizing) {
-            recognizing = false;
-            recognition.stop();
-        }
-        copy_button.style.display = 'none';
-        copy_info.style.display = 'inline-block';
-        showInfo('');
-    }
+<!-- Course section -->
+<section class="course-section position-relative">
+  <div class="shape-holder">
+    <img src="{{url_for('static', filename='image/section-2-shape-bg.svg')}}" alt="">
+  </div>
+  <div class="shape-holder" data-aos="zoom-in"  data-aos-once="true">
+    <img src="{{url_for('static', filename='image/section-2-shape.svg')}}" alt="">
+  </div>
+  <div class="shape-holder course-shape-3" data-aos="zoom-in-left" data-aos-once="true">
+    <img src="{{url_for('static', filename='image/course-yelloow-svg.svg')}}" alt="">
+  </div>
+  <div class="container pt-lg--85">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="section-title section-black">
+          <h2>What you’ll learn</h2>
+          <p>We designed and tested prototypes that helped identify pain points in the account creation process. Together, we shaped the new standard.</p>
+        </div>
+      </div>
+    </div>
+    <div class="accordion course-accordion" id="accordionExample" >
+      <div class="card course-card"  data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
+        <div class="card-header" id="headingOne">
+          <div class="row">
+              <div class="col-xl-6 col-lg-7">
+                <div class="acc-left-content d-flex">
+                  <div class="acc-icon">
+                    <img src="{{url_for('static', filename='image/course-acc-icon.svg')}}" alt="">
+                  </div>
+                  <div class="acc-head-contents">
+                    <h3>Introduction to Python</h3>
+                    <p>Who are you developing for? How will they use your design? Building user personas can answer these.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-lg-5 offset-xl-2">
+                <div class="acc-right-content d-flex">
+                  <!-- <div class="course-length-badge">
+                    <span>Video Classes</span>
+                    <span>3.4hrs</span>
+                  </div> -->
+                  <button class="btn acc-toggle" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <i class="icon icon-minimal-down"></i>
+                  </button>
+                </div>
+              </div>
+          </div>
+          
+        </div>
+    
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+          <div class="card-body">
+              <ul class="course-inline-list">
+                <li><a href=""><i class="icon icon-check-2"></i>Print strings and numbers</a></li>
+                <li><a href=""><i class="icon icon-check-2"></i>Create variables</a></li>
+                <li><a href=""><i class="icon icon-check-2"></i>Print Variables</a></li>
+                <li><a href=""><i class="icon icon-check-2"></i>Create lists</a></li>
+                <!-- <li><a href=""><i class="icon icon-check-2"></i>Print variables</a></li> -->
+              </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card course-card"  data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" data-aos-delay="200">
+        <div class="card-header" id="heading2">
+          <div class="row">
+              <div class="col-lg-6">
+                <div class="acc-left-content d-flex">
+                  <div class="acc-icon">
+                    <img src="{{url_for('static', filename='image/course-acc-icon.svg')}}" alt="">
+                  </div>
+                  <div class="acc-head-contents">
+                    <h3>If Conditions in Python</h3>
+                    <p>Who are you developing for? How will they use your design? Building user personas can answer these.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 offset-lg-2">
+                <div class="acc-right-content d-flex">
+                  <!-- <div class="course-length-badge">
+                    <span>6 Video Classes</span>
+                    <span>3.4hrs</span>
+                  </div> -->
+                  <button class="btn acc-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
+                    <i class="icon icon-minimal-down"></i>
+                  </button>
+                </div>
+              </div>
+          </div>
+          
+        </div>
+    
+        <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordionExample">
+          <div class="card-body">
+              <ul class="course-inline-list">
+                <li><a href=""><i class="icon icon-check-2"></i>Learn to use if conditions for variables</a></li>
+                <li><a href=""><i class="icon icon-check-2"></i>Learn to use if conditions for lists</a></li>
+                <!-- <li><a href=""><i class="icon icon-check-2"></i>Variable types</a></li>
+                <li><a href=""><i class="icon icon-check-2"></i>Print variables</a></li> -->
+              </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card course-card"  data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" data-aos-delay="400">
+        <div class="card-header" id="heading3">
+          <div class="row">
+              <div class="col-lg-6">
+                <div class="acc-left-content d-flex">
+                  <div class="acc-icon">
+                    <img src="{{url_for('static', filename='image/course-acc-icon.svg')}}" alt="">
+                  </div>
+                  <div class="acc-head-contents">
+                    <h3>For Loops in Python</h3>
+                    <p>Who are you developing for? How will they use your design? Building user personas can answer these.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 offset-lg-2">
+                <div class="acc-right-content d-flex">
+                  <!-- <div class="course-length-badge">
+                    <span>6 Video Classes</span>
+                    <span>3.4hrs</span>
+                  </div> -->
+                  <button class="btn acc-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapse3" aria-expanded="true" aria-controls="collapse3">
+                    <i class="icon icon-minimal-down"></i>
+                  </button>
+                </div>
+              </div>
+          </div>
+          
+        </div>
+    
+        <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#accordionExample">
+          <div class="card-body">
+              <ul class="course-inline-list">
+                <li><a href=""><i class="icon icon-check-2"></i>Learn to use range()</a></li>
+                <li><a href=""><i class="icon icon-check-2"></i>Loop through a string</a></li>
+                <li><a href=""><i class="icon icon-check-2"></i>Loop through a list</a></li>
+              </ul>
+          </div>
+        </div>
+      </div>
+      <div class="card course-card"  data-aos="fade-up" data-aos-duration="2000" data-aos-once="true" data-aos-delay="600">
+        <div class="card-header" id="heading4">
+          <div class="row">
+              <div class="col-lg-6">
+                <div class="acc-left-content d-flex">
+                  <div class="acc-icon">
+                    <img src="{{url_for('static', filename='image/course-acc-icon.svg')}}" alt="">
+                  </div>
+                  <div class="acc-head-contents">
+                    <h3>Functions in Python</h3> 
+                    <p>Who are you developing for? How will they use your design? Building user personas can answer these.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 offset-lg-2">
+                <div class="acc-right-content d-flex">
+                  <!-- <div class="course-length-badge">
+                    <span>6 Video Classes</span>
+                    <span>3.4hrs</span>
+                  </div> -->
+                  <button class="btn acc-toggle collapsed" type="button" data-toggle="collapse" data-target="#collapse4" aria-expanded="true" aria-controls="collapse4">
+                    <i class="icon icon-minimal-down"></i>
+                  </button>
+                </div>
+              </div>
+          </div>
+          
+        </div>
+    
+        <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordionExample">
+          <div class="card-body">
+              <ul class="course-inline-list">
+                <li><a href=""><i class="icon icon-check-2"></i>Learn how to define a function</a></li>
+                <li><a href=""><i class="icon icon-check-2"></i>Learn how to take in arguments</a></li>
+                <li><a href=""><i class="icon icon-check-2"></i>Learn how to call a function</a></li>
+              </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    function emailButton() {
-        if (recognizing) {
-            create_email = true;
-            recognizing = false;
-            recognition.stop();
-        } else {
-            createEmail();
-        }
-        email_button.style.display = 'none';
-        email_info.style.display = 'inline-block';
-        showInfo('');
-    }
 
-    function startButton(event) {
-        if (recognizing) {
-            recognition.stop();
-            return;
-        }
-        final_transcript = '';
-        recognition.lang = select_dialect.value;
-        recognition.start();
-        ignore_onend = false;
-        final_span.innerHTML = '';
-        interim_span.innerHTML = '';
-        start_img.src = '{{url_for("static", filename="mic-slash.gif")}}';
-        showInfo('info_allow');
-        showButtons('none');
-        start_timestamp = event.timeStamp;
-    }
 
-    function showInfo(s) {
-        if (s) {
-            for (var child = info.firstChild; child; child = child.nextSibling) {
-                if (child.style) {
-                    child.style.display = child.id == s ? 'inline' : 'none';
-                }
-            }
-            info.style.visibility = 'visible';
-        } else {
-            info.style.visibility = 'hidden';
-        }
-    }
+<!-- Footer Section -->
+<div class="footer-section position-relative">
+  <div class="container margin-decrese">
+      <div class="row justify-content-center">
+          <div class="col-md-9 col-lg-8 col-xl-7" data-aos="flip-down" data-aos-delay="55" data-aos-duration="2000" data-aos-once="true">
+            <div class="footer-content">
+                <span class="title-small-text">Time to take action</span>
+                <h2>Ready to start coding?</h2>
+                <div class="footer-btn"><a href="" class="btn btn--orange btn--hover-shine">Get Started</a></div>
+            </div>
+          </div>
+        </div>
+        <span class="section-devider mt--130"></span>
+      <div class="row mt--70">
+          <!-- <div class="col-lg-4 col-xl-4 col-sm-6 col-margin">
+              <span class="ft-title-sm">Explore</span>
+              <div class="row">
+                <div class="col-lg-5 col-4">
+                    <ul class="footer-list">
+                        <li><a href="">About</a></li>
+                        <li><a href="">Features</a></li>
+                        <li><a href="">Works</a></li>
+                        <li><a href="">Career</a></li>
+                      </ul>
+                </div>
 
-    var current_style;
-    function showButtons(style) {
-        if (style == current_style) {
-            return;
-        }
-        current_style = style;
-        copy_button.style.display = style;
-        email_button.style.display = style;
-        copy_info.style.display = 'none';
-        email_info.style.display = 'none';
-    }
-</script>
+                <div class="col-lg-7 col-8">
+                    <ul class="footer-list">
+                        <li><a href="">Contact</a></li>
+                        <li><a href="">Help &amp; Support</a></li>
+                        <li><a href="">Privacy Policy</a></li>
+                        <li><a href="">Terms &amp; Conditions</a></li>
+                      </ul>
+                </div>
+              </div>
+          </div> -->
+          <!-- <div class="col-lg-3 col-xl-3 col-sm-6 col-margin">
+              <span class="ft-title-sm">Product</span>
+              <ul class="footer-list">
+                <li><a href="">Essential Landing Page</a></li>
+                <li><a href="">Alpha Dashboard Pro</a></li>
+                <li><a href="">Karnel Admin Dashboard</a></li>
+                <li><a href="">Gray UI Kit</a></li>
+              </ul>
+          </div> -->
+          <div class="col-lg-12 col-xl-12 col-margin">
+            <div class="ft-newsletter-box">
+                <span class="ft-title-sm">Subscribe to our newsletter</span>
+                <p>Subscribe to get lastest offers, news and events announcements. No spam in your inbox.</p>
+                <form action="">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Enter your email address">
+                    <button class="submit-btn"><i class="icon icon-tail-right"></i></button>
+                  </div>
+                </form>
+            </div>
+          </div>
+        </div>
+  </div>
+  <div class="shape-holder footer-shape-1" data-aos="zoom-in-left" data-aos-once="true"><img src="{{url_for('static', filename='image/cta-shape.svg')}}" alt=""></div>
+  <div class="shape-holder footer-shape-2" data-aos="zoom-in-right" data-aos-once="true"><img src="{{url_for('static', filename='image/footer-shape.svg')}}" alt=""></div>
+</div>
+</div>
+  <!-- Vendor JS-->
+  <script src="{{url_for('static', filename='plugins/jquery/jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename='plugins/jquery/jquery-migrate.min.js')}}"></script>
+    <script src="{{url_for('static', filename='plugins/bootstrap-4.3.1/js/bootstrap.bundle.js')}}"></script>
+  
+    <!-- Plugins JS -->
+    <script src="{{url_for('static', filename='plugins/meanmenu/jquery.meanmenu.js')}}"></script>
+    <script src="{{url_for('static', filename='plugins/slick-1.8.1/slick.min.js')}}"></script>
+    <script src="{{url_for('static', filename='plugins/fancybox-master/jquery.fancybox.min.js')}}"></script>
+    <script src="{{url_for('static', filename='plugins/aos-animation/aos.js')}}"></script>
+  
+    <!-- Custom JS -->
+    <script src="{{url_for('static', filename='js/active.js')}}"></script>
+</body>
+
+</html>

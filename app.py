@@ -10,7 +10,7 @@ CODE = []
 
 @app.route('/', methods=["GET"])
 def index():
-    return render_template("index.html", code=CODE)
+    return render_template("editor.html", code=CODE)
 
 
 @app.route('/', methods=["POST"])
