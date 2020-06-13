@@ -31,7 +31,7 @@ while(1):
 
             words = MyText.split()
             response = ""
-            print(words)
+            # print(words)
             if words[0] == "back" and words[1] == "tab":
                 response = ""
                 addTab -= 1
@@ -66,9 +66,9 @@ while(1):
             # print("\n".join(lines))
 
             # toParse = "\n".join([x for x in lines if x != ""])
-
-            print(response)
-            lines.append(response)
+            if response != "":
+                print(response)
+                lines.append(response)
     except: 
         pass
 
@@ -84,6 +84,6 @@ print(toParse)
 
 print("\n\n\nPARSING YOUR CODE\n\n\n")
 try:
-    eval(toParse)
+    exec(toParse)
 except:
     print("There was an error processing your code")
