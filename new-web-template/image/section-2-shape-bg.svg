@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1920px" height="1063px" viewBox="0 0 1920 1063" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>BG</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M1977,79.4601538 L1977,1063 L54,1063 L54,77.9924687 C18.989275,72.0326362 0,65.6445906 0,59 C0,26.4151998 456.669555,0 1020,0 C1583.33044,0 2040,26.4151998 2040,59 C2040,66.193321 2017.74484,73.0859749 1977,79.4601538 Z" id="path-1"></path>
+    </defs>
+    <g id="Pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="06-Course" transform="translate(0.000000, -952.000000)">
+            <g id="Topics" transform="translate(-59.000000, 952.000000)">
+                <g id="BG">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use fill="#F7FBFC" xlink:href="#path-1"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

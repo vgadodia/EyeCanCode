@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title></title>
+  <!-- Plugins CSS -->
+  <link rel="stylesheet" href="./plugins/bootstrap-4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./plugins/meanmenu/meanmenu.css">
+  <link rel="stylesheet" href="./plugins/slick-1.8.1/slick.css">
+  <link rel="stylesheet" href="./plugins/fancybox-master/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="./plugins/aos-animation/aos.css">
+  <!-- fonts -->
+  <link rel="stylesheet" href="./fonts/ep-icon-fonts/css/style.css">
+  <link rel="stylesheet" href="./fonts/fontawesome-5/css/all.min.css">
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="./css/settings.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <style>
+    * {
+        font-family: Verdana, Arial, sans-serif;
+    }
+
+    a:link {
+        color: #000;
+        text-decoration: none;
+    }
+
+
+    .center {
+        padding: 10px;
+        text-align: center;
+    }
+
+    .final {
+        color: black;
+        padding-right: 3px;
+        font-size: 20px;
+    }
+
+    .interim {
+        color: gray;
+        font-size: 20px;
+    }
+
+    .info {
+        font-size: 14px;
+        text-align: center;
+        color: #777;
+        display: none;
+    }
+
+    .right {
+        float: right;
+    }
+
+   
+
+    #headline {
+        font-size: 40px;
+        font-weight: 300;
+    }
+
+    #info {
+        font-size: 20px;
+        text-align: center;
+        color: #777;
+        visibility: hidden;
+    }
+
+    #results {
+        font-size: 14px;
+        font-weight: bold;
+        border: 1px solid #ddd;
+        padding: 15px;
+        text-align: left;
+        min-height: 150px;
+    }
+
+    #run {
+        font-size: 14px;
+        font-weight: bold;
+        border: 1px solid #ddd;
+        padding: 15px;
+        text-align: left;
+        min-height: 500px;
+    }
+
+    #start_button {
+        border: 0;
+        background-color: transparent;
+        padding: 0;
+    }
+</style>
+</head>
+
+<body >
+<div class="site-wrapper">
+<!-- Header Starts -->
+  <header class="site-header position-relative">
+        <div class="container">
+            <div class="row justify-content-center align-items-center position-relative">
+                <div class="col-sm-3 col-6 col-lg-2 col-xl-2 order-lg-1">
+                  <!-- Brand Logo -->
+                    <div class="brand-logo">
+                        <a href=""><img src="image/main-logo.png" alt="" /></a>
+                    </div>
+                </div>
+                <div class="col-sm-8 col-lg-2 col-xl-2 d-none d-sm-block order-lg-3">
+                    <div class="header-btns justify-content-end">
+                        <a href="#" class="btn btn-link">Sign In</a>
+                    </div>
+                </div>
+                <!-- Menu Block -->
+                <div class="col-sm-1 col-6 col-lg-6 col-xl-6 offset-lg-2  position-static order-lg-2">
+                    <div class="main-navigation">
+                        <ul class="main-menu">
+                            <li class="menu-item "><a href="index.html">Home</a></li>
+
+                            <li class="menu-item "><a href="editor.html">Editor</a></li>
+                    
+                            <li class="menu-item"><a href="academy.html">Academy</a></li>
+                            </ul>
+                    </div>
+                    <div class="mobile-menu"></div>
+                </div>
+            </div>
+        </div>
+        <div class="shape-holder header-shape" data-aos="fade-down" data-aos-once="true"><img src="image/header-shape.svg" alt=""></div>
+  </header>
+
+
+
+
+
+<!-- Course section -->
+<section class="course-section position-relative">
+  <div class="container pt-lg--85">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="section-title section-black" style="margin-top: -150px;">
+          <h2>Speech-to-text Python Code Editor</h2>
+          <!-- <p>We designed and tested prototypes that helped identify pain points in the account creation process. Together, we shaped the new standard.</p> -->
+        </div>
+      </div>
+    </div>
+
+  <div id="info">
+      <p id="info_start">Click on the microphone icon and begin speaking.</p>
+      <p id="info_speak_now">Speak now.</p>
+      <p id="info_no_speech">No speech was detected. You may need to adjust your
+          <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
+              microphone settings</a>.</p>
+      <p id="info_no_microphone" style="display:none">
+          No microphone was found. Ensure that a microphone is installed and that
+          <a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
+              microphone settings</a> are configured correctly.</p>
+      <p id="info_allow">Click the "Allow" button above to enable your microphone.</p>
+      <p id="info_denied">Permission to use microphone was denied.</p>
+      <p id="info_blocked">Permission to use microphone is blocked. To change,
+          go to chrome://settings/contentExceptions#media-stream</p>
+      <p id="info_upgrade">Web Speech API is not supported by this browser.
+          Upgrade to <a href="//www.google.com/chrome">Chrome</a>
+          version 25 or later.</p>
+  </div>
+  <div class="right">
+      <button id="start_button" onclick="startButton(event)">
+          <img id="start_img" src='{{url_for("static", filename="mic.gif")}}' alt="Start"></button>
+  </div>
+  <div id="results">
+      <span id="final_span" class="final"></span>
+      <span id="interim_span" class="interim"></span>
+      <p>
+  </div>
+  <br><Br>
+  <div id="run">
+      {% for para in code %}
+      <p>{{para}}</p>
+      {% endfor %}
+  
+  </div>
+
+  <div class="center">
+      <p>
+      <div id="div_language">
+          <select id="select_language" onchange="updateCountry()"></select>
+          <select id="select_dialect"></select>
+      </div>
+  </div>
+
+    <br><br>
+  </div>
+</section>
+
+
+
+<!-- Footer Section -->
+<div class="footer-section position-relative">
+  <div class="container margin-decrese">
+        <span class="section-devider mt--130"></span>
+      <div class="row mt--70">
+          <!-- <div class="col-lg-4 col-xl-4 col-sm-6 col-margin">
+              <span class="ft-title-sm">Explore</span>
+              <div class="row">
+                <div class="col-lg-5 col-4">
+                    <ul class="footer-list">
+                        <li><a href="">About</a></li>
+                        <li><a href="">Features</a></li>
+                        <li><a href="">Works</a></li>
+                        <li><a href="">Career</a></li>
+                      </ul>
+                </div>
+
+                <div class="col-lg-7 col-8">
+                    <ul class="footer-list">
+                        <li><a href="">Contact</a></li>
+                        <li><a href="">Help &amp; Support</a></li>
+                        <li><a href="">Privacy Policy</a></li>
+                        <li><a href="">Terms &amp; Conditions</a></li>
+                      </ul>
+                </div>
+              </div>
+          </div> -->
+          <!-- <div class="col-lg-3 col-xl-3 col-sm-6 col-margin">
+              <span class="ft-title-sm">Product</span>
+              <ul class="footer-list">
+                <li><a href="">Essential Landing Page</a></li>
+                <li><a href="">Alpha Dashboard Pro</a></li>
+                <li><a href="">Karnel Admin Dashboard</a></li>
+                <li><a href="">Gray UI Kit</a></li>
+              </ul>
+          </div> -->
+          <div class="col-lg-12 col-xl-12 col-margin">
+            <div class="ft-newsletter-box">
+                <span class="ft-title-sm">Subscribe to our newsletter</span>
+                <p>Subscribe to get lastest offers, news and events announcements. No spam in your inbox.</p>
+                <form action="">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Enter your email address">
+                    <button class="submit-btn"><i class="icon icon-tail-right"></i></button>
+                  </div>
+                </form>
+            </div>
+          </div>
+        </div>
+  </div>
+  <div class="shape-holder footer-shape-2" data-aos="zoom-in-right" data-aos-once="true"><img src="image/footer-shape.svg" alt=""></div>
+</div>
+</div>
+  <!-- Vendor JS-->
+  <script src="./plugins/jquery/jquery.min.js"></script>
+  <script src="./plugins/jquery/jquery-migrate.min.js"></script>
+  <script src="./plugins/bootstrap-4.3.1/js/bootstrap.bundle.js"></script>
+
+  <!-- Plugins JS -->
+  <script src="./plugins/meanmenu/jquery.meanmenu.js"></script>
+  <script src="./plugins/slick-1.8.1/slick.min.js"></script>
+  <script src="./plugins/fancybox-master/jquery.fancybox.min.js"></script>
+  <script src="./plugins/aos-animation/aos.js"></script>
+
+  <!-- Custom JS -->
+  <script src="./js/active.js"></script>
+  <script>
+    var langs =
+        [['Afrikaans', ['af-ZA']],
+        ['Bahasa Indonesia', ['id-ID']],
+        ['Bahasa Melayu', ['ms-MY']],
+        ['Català', ['ca-ES']],
+        ['Čeština', ['cs-CZ']],
+        ['Deutsch', ['de-DE']],
+        ['English', ['en-AU', 'Australia'],
+            ['en-CA', 'Canada'],
+            ['en-IN', 'India'],
+            ['en-NZ', 'New Zealand'],
+            ['en-ZA', 'South Africa'],
+            ['en-GB', 'United Kingdom'],
+            ['en-US', 'United States']],
+        ['Español', ['es-AR', 'Argentina'],
+            ['es-BO', 'Bolivia'],
+            ['es-CL', 'Chile'],
+            ['es-CO', 'Colombia'],
+            ['es-CR', 'Costa Rica'],
+            ['es-EC', 'Ecuador'],
+            ['es-SV', 'El Salvador'],
+            ['es-ES', 'España'],
+            ['es-US', 'Estados Unidos'],
+            ['es-GT', 'Guatemala'],
+            ['es-HN', 'Honduras'],
+            ['es-MX', 'México'],
+            ['es-NI', 'Nicaragua'],
+            ['es-PA', 'Panamá'],
+            ['es-PY', 'Paraguay'],
+            ['es-PE', 'Perú'],
+            ['es-PR', 'Puerto Rico'],
+            ['es-DO', 'República Dominicana'],
+            ['es-UY', 'Uruguay'],
+            ['es-VE', 'Venezuela']],
+        ['Euskara', ['eu-ES']],
+        ['Français', ['fr-FR']],
+        ['Galego', ['gl-ES']],
+        ['Hrvatski', ['hr_HR']],
+        ['IsiZulu', ['zu-ZA']],
+        ['Íslenska', ['is-IS']],
+        ['Italiano', ['it-IT', 'Italia'],
+            ['it-CH', 'Svizzera']],
+        ['Magyar', ['hu-HU']],
+        ['Nederlands', ['nl-NL']],
+        ['Norsk bokmål', ['nb-NO']],
+        ['Polski', ['pl-PL']],
+        ['Português', ['pt-BR', 'Brasil'],
+            ['pt-PT', 'Portugal']],
+        ['Română', ['ro-RO']],
+        ['Slovenčina', ['sk-SK']],
+        ['Suomi', ['fi-FI']],
+        ['Svenska', ['sv-SE']],
+        ['Türkçe', ['tr-TR']],
+        ['български', ['bg-BG']],
+        ['Pусский', ['ru-RU']],
+        ['Српски', ['sr-RS']],
+        ['한국어', ['ko-KR']],
+        ['中文', ['cmn-Hans-CN', '普通话 (中国大陆)'],
+            ['cmn-Hans-HK', '普通话 (香港)'],
+            ['cmn-Hant-TW', '中文 (台灣)'],
+            ['yue-Hant-HK', '粵語 (香港)']],
+        ['日本語', ['ja-JP']],
+        ['Lingua latīna', ['la']]];
+
+    for (var i = 0; i < langs.length; i++) {
+        select_language.options[i] = new Option(langs[i][0], i);
+    }
+    select_language.selectedIndex = 6;
+    updateCountry();
+    select_dialect.selectedIndex = 6;
+    showInfo('info_start');
+
+    function updateCountry() {
+        for (var i = select_dialect.options.length - 1; i >= 0; i--) {
+            select_dialect.remove(i);
+        }
+        var list = langs[select_language.selectedIndex];
+        for (var i = 1; i < list.length; i++) {
+            select_dialect.options.add(new Option(list[i][1], list[i][0]));
+        }
+        select_dialect.style.visibility = list[1].length == 1 ? 'hidden' : 'visible';
+    }
+
+    var create_email = false;
+    var final_transcript = '';
+    var recognizing = false;
+    var ignore_onend;
+    var start_timestamp;
+    if (!('webkitSpeechRecognition' in window)) {
+        upgrade();
+    } else {
+        start_button.style.display = 'inline-block';
+        var recognition = new webkitSpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+
+        recognition.onstart = function () {
+            recognizing = true;
+            showInfo('info_speak_now');
+            start_img.src = '{{url_for("static", filename="mic-animate.gif")}}';
+        };
+
+        recognition.onerror = function (event) {
+            if (event.error == 'no-speech') {
+                start_img.src = '{{url_for("static", filename="mic.gif")}}';
+                showInfo('info_no_speech');
+                ignore_onend = true;
+            }
+            if (event.error == 'audio-capture') {
+                start_img.src = '{{url_for("static", filename="mic.gif")}}';
+                showInfo('info_no_microphone');
+                ignore_onend = true;
+            }
+            if (event.error == 'not-allowed') {
+                if (event.timeStamp - start_timestamp < 100) {
+                    showInfo('info_blocked');
+                } else {
+                    showInfo('info_denied');
+                }
+                ignore_onend = true;
+            }
+        };
+
+        recognition.onend = function () {
+            recognizing = false;
+            if (ignore_onend) {
+                return;
+            }
+            start_img.src = '{{url_for("static", filename="mic.gif")}}';
+            if (!final_transcript) {
+                showInfo('info_start');
+                return;
+            }
+            showInfo('');
+            if (window.getSelection) {
+                window.getSelection().removeAllRanges();
+                var range = document.createRange();
+                range.selectNode(document.getElementById('final_span'));
+                window.getSelection().addRange(range);
+            }
+            if (create_email) {
+                create_email = false;
+                createEmail();
+            }
+        };
+
+        recognition.onresult = function (event) {
+            var interim_transcript = '';
+            for (var i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) {
+                    final_transcript += event.results[i][0].transcript;
+                    console.log(event.results[i][0].transcript);
+                    var formData = new FormData();
+                    formData.append("name", "Murdock");
+                    var req = new XMLHttpRequest();
+                    req.open("POST", "/" + event.results[i][0].transcript);
+                    req.send(formData);
+                    // var xhttp = new XMLHttpRequest();
+                    // xhttp.onreadystatechange = function () {
+                    //     if (this.readyState == 4 && this.status == 200) {
+                    //         // Typical action to be performed when the document is ready:
+                    //         // document.getElementById("demo").innerHTML = xhttp.responseText;
+                    //     }
+                    // };
+                    // xhttp.open("POST", "/" + event.results[i][0].transcript, true);
+                    // xhttp.send();
+                } else {
+                    interim_transcript += event.results[i][0].transcript;
+                }
+            }
+            // final_transcript = capitalize(final_transcript);
+            final_span.innerHTML = linebreak(final_transcript);
+            interim_span.innerHTML = linebreak(interim_transcript);
+            if (final_transcript || interim_transcript) {
+                showButtons('inline-block');
+            }
+        };
+    }
+
+    function upgrade() {
+        start_button.style.visibility = 'hidden';
+        showInfo('info_upgrade');
+    }
+
+    var two_line = /\n\n/g;
+    var one_line = /\n/g;
+    function linebreak(s) {
+        return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
+    }
+
+    var first_char = /\S/;
+    function capitalize(s) {
+        return s.replace(first_char, function (m) { return m.toUpperCase(); });
+    }
+
+    function createEmail() {
+        var n = final_transcript.indexOf('\n');
+        if (n < 0 || n >= 80) {
+            n = 40 + final_transcript.substring(40).indexOf(' ');
+        }
+        var subject = encodeURI(final_transcript.substring(0, n));
+        var body = encodeURI(final_transcript.substring(n + 1));
+        window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
+    }
+
+    function copyButton() {
+        if (recognizing) {
+            recognizing = false;
+            recognition.stop();
+        }
+        copy_button.style.display = 'none';
+        copy_info.style.display = 'inline-block';
+        showInfo('');
+    }
+
+    function emailButton() {
+        if (recognizing) {
+            create_email = true;
+            recognizing = false;
+            recognition.stop();
+        } else {
+            createEmail();
+        }
+        email_button.style.display = 'none';
+        email_info.style.display = 'inline-block';
+        showInfo('');
+    }
+
+    function startButton(event) {
+        if (recognizing) {
+            recognition.stop();
+            return;
+        }
+        final_transcript = '';
+        recognition.lang = select_dialect.value;
+        recognition.start();
+        ignore_onend = false;
+        final_span.innerHTML = '';
+        interim_span.innerHTML = '';
+        start_img.src = '{{url_for("static", filename="mic-slash.gif")}}';
+        showInfo('info_allow');
+        showButtons('none');
+        start_timestamp = event.timeStamp;
+    }
+
+    function showInfo(s) {
+        if (s) {
+            for (var child = info.firstChild; child; child = child.nextSibling) {
+                if (child.style) {
+                    child.style.display = child.id == s ? 'inline' : 'none';
+                }
+            }
+            info.style.visibility = 'visible';
+        } else {
+            info.style.visibility = 'hidden';
+        }
+    }
+
+    var current_style;
+    function showButtons(style) {
+        if (style == current_style) {
+            return;
+        }
+        current_style = style;
+        copy_button.style.display = style;
+        email_button.style.display = style;
+        copy_info.style.display = 'none';
+        email_info.style.display = 'none';
+    }
+</script>
+</body>
+
+</html>

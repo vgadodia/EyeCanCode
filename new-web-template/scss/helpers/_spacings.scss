@@ -1,0 +1,591 @@
+
+/*=====================================*/
+
+/*-- :::: Space Decrease :::: --*/
+
+/*=====================================*/
+
+@for $i from 0 through 30 {
+  .space-db--#{5 * $i} {
+      margin-bottom: -5px *$i;
+  }
+}
+
+@for $i from 0 through 30 {
+  .space-dt--#{5 * $i} {
+      margin-top: -5px *$i;
+  }
+}
+
+/*-- Responsive Space Decrease top --*/
+
+@for $i from 0 through 40 {
+  .space-dt-sm-#{$i * 5} {
+      @include mobile-lg {
+          margin-top: #{($i * -5)}px !important;
+      }
+      @include tablet {
+          margin-top: #{($i * -5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .space-dt-md-#{$i * 5} {
+      @include tablet {
+          margin-top: #{($i * -5)}px !important;
+      }
+      @include desktops {
+          margin-top: #{($i * -5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .space-dt-lg-#{$i * 5} {
+      @include desktops {
+          margin-top: #{($i * -5)}px !important;
+      }
+      @include large-desktops {
+          margin-top: #{($i * -5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .space-dt-xl-#{$i * 5} {
+      @include large-desktops {
+          margin-top: #{($i * -5)}px !important;
+      }
+      @include extra-large-desktops {
+          margin-top: #{($i * -5)}px;
+      }
+  }
+}
+
+/*-- Responsive Space Decrease bottom --*/
+
+@for $i from 0 through 40 {
+  .space-db-sm-#{$i * 5} {
+      @include mobile-lg {
+          margin-bottom: #{($i * -5)}px !important;
+      }
+      @include tablet {
+          margin-bottom: #{($i * -5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .space-db-md-#{$i * 5} {
+      @include tablet {
+          margin-bottom: #{($i * -5)}px !important;
+      }
+      @include desktops {
+          margin-bottom: #{($i * -5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .space-db-lg-#{$i * 5} {
+      @include desktops {
+          margin-bottom: #{($i * -5)}px !important;
+      }
+      @include large-desktops {
+          margin-bottom: #{($i * -5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .space-db-xl-#{$i * 5} {
+      @include large-desktops {
+          margin-bottom: #{($i * -5)}px !important;
+      }
+      @include extra-large-desktops {
+          margin-bottom: #{($i * -5)}px;
+      }
+  }
+}
+
+/*=====================================*/
+
+/*-- :::: Paddings :::: --*/
+
+/*=====================================*/
+
+/*-- Padding top --*/
+
+@for $i from 0 through 40 {
+  .pt--#{$i * 5} {
+      padding-top: #{($i * 5)}px !important;
+  }
+}
+
+/*-- Padding Bottom --*/
+
+@for $i from 0 through 40 {
+  .pb--#{5 * $i} {
+      padding-bottom: #{($i * 5)}px !important;
+  }
+}
+
+/*-- Padding Left --*/
+
+@for $i from 0 through 40 {
+  .pl--#{5 * $i} {
+      padding-left: #{($i * 5)}px !important;
+  }
+}
+
+/*-- Padding Right --*/
+
+@for $i from 0 through 40 {
+  .pr--#{5 * $i} {
+      padding-right: #{($i * 5)}px !important;
+  }
+}
+
+/*-- Padding Vertical --*/
+
+@for $i from 0 through 40 {
+  .px--#{$i * 5} {
+      padding-left: #{($i * 5)}px !important;
+      padding-right: #{($i * 5)}px !important;
+  }
+}
+
+/*-- Padding Horizontal --*/
+
+@for $i from 0 through 40 {
+  .py--#{$i * 5} {
+      padding-top: #{($i * 5)}px !important;
+      padding-bottom: #{($i * 5)}px !important;
+  }
+}
+
+/*=====================================*/
+
+/*-- :::: Margins :::: --*/
+
+/*=====================================*/
+
+/*-- Margins top --*/
+
+@for $i from 0 through 40 {
+  .mt--#{$i * 5} {
+      margin-top: #{($i * 5)}px !important;
+  }
+}
+
+/*-- Margin Bottom --*/
+
+@for $i from 1 through 40 {
+  .mb--#{5 * $i} {
+      margin-bottom: 5px *$i !important;
+  }
+}
+
+/*-- Margin Left --*/
+
+@for $i from 1 through 40 {
+  .ml--#{5 * $i} {
+      margin-left: #{($i * 5)}px !important;
+  }
+}
+
+/*-- Margin Right --*/
+
+@for $i from 1 through 40 {
+  .mr--#{5 * $i} {
+      margin-right: #{($i * 5)}px !important;
+  }
+}
+
+/*-- Margin Vertical --*/
+
+@for $i from 0 through 40 {
+  .mx--#{$i * 5} {
+      margin-left: #{($i * 5)}px !important;
+      margin-right: #{($i * 5)}px !important;
+  }
+}
+
+/*-- Margin Horizontal --*/
+
+@for $i from 0 through 40 {
+  .my--#{$i * 5} {
+      margin-top: #{($i * 5)}px !important;
+      margin-bottom: #{($i * 5)}px !important;
+  }
+}
+
+/*=====================================*/
+
+/*-- :::: Responsive Padding :::: --*/
+
+/*=====================================*/
+
+/*-- Responsive Padding top --*/
+
+@for $i from 0 through 40 {
+  .pt-sm--#{$i * 5} {
+      @include mobile-lg {
+          padding-top: #{($i * 5)}px !important;
+      }
+      @include tablet {
+          padding-top: #{($i * 5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .pt-md--#{$i * 5} {
+      @include tablet {
+          padding-top: #{($i * 5)}px !important;
+      }
+      @include desktops {
+          padding-top: #{($i * 5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .pt-lg--#{$i * 5} {
+      @include desktops {
+          padding-top: #{($i * 5)}px !important;
+      }
+      @include large-desktops {
+          padding-top: #{($i * 5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .pt-xl--#{$i * 5} {
+      @include large-desktops {
+          padding-top: #{($i * 5)}px !important;
+      }
+      @include extra-large-desktops {
+          padding-top: #{($i * 5)}px;
+      }
+  }
+}
+
+/*-- Responsive Padding bottom --*/
+
+@for $i from 0 through 40 {
+  .pb-sm--#{$i * 5} {
+      @include mobile-lg {
+          padding-bottom: #{($i * 5)}px !important;
+      }
+      @include tablet {
+          padding-bottom: #{($i * 5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .pb-md--#{$i * 5} {
+      @include tablet {
+          padding-bottom: #{($i * 5)}px !important;
+      }
+      @include desktops {
+          padding-bottom: #{($i * 5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .pb-lg--#{$i * 5} {
+      @include desktops {
+          padding-bottom: #{($i * 5)}px !important;
+      }
+      @include large-desktops {
+          padding-bottom: #{($i * 5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .pb-xl--#{$i * 5} {
+      @include large-desktops {
+          padding-bottom: #{($i * 5)}px !important;
+      }
+      @include extra-large-desktops {
+          padding-bottom: #{($i * 5)}px;
+      }
+  }
+}
+
+/*-- Responsive Padding left --*/
+
+@for $i from 0 through 40 {
+  .pl-sm--#{$i * 5} {
+      @include mobile-lg {
+          padding-left: #{($i * 5)}px !important;
+      }
+      @include tablet {
+          padding-left: #{($i * 5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .pl-md--#{$i * 5} {
+      @include tablet {
+          padding-left: #{($i * 5)}px !important;
+      }
+      @include desktops {
+          padding-left: #{($i * 5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .pl-lg--#{$i * 5} {
+      @include desktops {
+          padding-left: #{($i * 5)}px !important;
+      }
+      @include large-desktops {
+          padding-left: #{($i * 5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .pl-xl--#{$i * 5} {
+      @include large-desktops {
+          padding-left: #{($i * 5)}px !important;
+      }
+      @include extra-large-desktops {
+          padding-left: #{($i * 5)}px;
+      }
+  }
+}
+
+/*-- Responsive Padding Right --*/
+
+@for $i from 0 through 40 {
+  .pr-sm--#{$i * 5} {
+      @include mobile-lg {
+          padding-right: #{($i * 5)}px !important;
+      }
+      @include tablet {
+          padding-right: #{($i * 5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .pr-md--#{$i * 5} {
+      @include tablet {
+          padding-right: #{($i * 5)}px !important;
+      }
+      @include desktops {
+          padding-right: #{($i * 5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .pr-lg--#{$i * 5} {
+      @include desktops {
+          padding-right: #{($i * 5)}px !important;
+      }
+      @include large-desktops {
+          padding-right: #{($i * 5)}px;
+      }
+  }
+}
+
+/*=====================================*/
+
+/*-- :::: Responsive Margins :::: --*/
+
+/*=====================================*/
+
+/*-- Responsive Margins top --*/
+
+@for $i from 0 through 40 {
+  .mt-sm--#{$i * 5} {
+      @include mobile-lg {
+          margin-top: #{($i * 5)}px !important;
+      }
+      @include tablet {
+          margin-top: #{($i * 5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .mt-md--#{$i * 5} {
+      @include tablet {
+          margin-top: #{($i * 5)}px !important;
+      }
+      @include desktops {
+          margin-top: #{($i * 5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .mt-lg--#{$i * 5} {
+      @include desktops {
+          margin-top: #{($i * 5)}px !important;
+      }
+      @include large-desktops {
+          margin-top: #{($i * 5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .mt-xl--#{$i * 5} {
+      @include large-desktops {
+          margin-top: #{($i * 5)}px !important;
+      }
+      @include extra-large-desktops {
+          margin-top: #{($i * 5)}px;
+      }
+  }
+}
+
+/*-- Responsive Margins bottom --*/
+
+@for $i from 0 through 40 {
+  .mb-sm--#{$i * 5} {
+      @include mobile-lg {
+          margin-bottom: #{($i * 5)}px !important;
+      }
+      @include tablet {
+          margin-bottom: #{($i * 5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .mb-md--#{$i * 5} {
+      @include tablet {
+          margin-bottom: #{($i * 5)}px !important;
+      }
+      @include desktops {
+          margin-bottom: #{($i * 5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .mb-lg--#{$i * 5} {
+      @include desktops {
+          margin-bottom: #{($i * 5)}px !important;
+      }
+      @include large-desktops {
+          margin-bottom: #{($i * 5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .mb-xl--#{$i * 5} {
+      @include large-desktops {
+          margin-bottom: #{($i * 5)}px !important;
+      }
+      @include extra-large-desktops {
+          margin-bottom: #{($i * 5)}px;
+      }
+  }
+}
+
+/*-- Responsive Margins left --*/
+
+@for $i from 0 through 40 {
+  .ml-sm--#{$i * 5} {
+      @include mobile-lg {
+          margin-left: #{($i * 5)}px !important;
+      }
+      @include tablet {
+          margin-left: #{($i * 5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .ml-md--#{$i * 5} {
+      @include tablet {
+          margin-left: #{($i * 5)}px !important;
+      }
+      @include desktops {
+          margin-left: #{($i * 5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .ml-lg--#{$i * 5} {
+      @include desktops {
+          margin-left: #{($i * 5)}px !important;
+      }
+      @include large-desktops {
+          margin-left: #{($i * 5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .ml-xl--#{$i * 5} {
+      @include large-desktops {
+          margin-left: #{($i * 5)}px !important;
+      }
+      @include extra-large-desktops {
+          margin-left: #{($i * 5)}px;
+      }
+  }
+}
+
+/*-- Responsive Margins Right --*/
+
+@for $i from 0 through 40 {
+  .mr-sm--#{$i * 5} {
+      @include mobile-lg {
+          margin-right: #{($i * 5)}px !important;
+      }
+      @include tablet {
+          margin-right: #{($i * 5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .mr-md--#{$i * 5} {
+      @include tablet {
+          margin-right: #{($i * 5)}px !important;
+      }
+      @include desktops {
+          margin-right: #{($i * 5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .mr-lg--#{$i * 5} {
+      @include desktops {
+          margin-right: #{($i * 5)}px !important;
+      }
+      @include large-desktops {
+          margin-right: #{($i * 5)}px;
+      }
+  }
+}
+
+@for $i from 0 through 40 {
+  .mr-xl--#{$i * 5} {
+      @include large-desktops {
+          margin-right: #{($i * 5)}px !important;
+      }
+      @include extra-large-desktops {
+          margin-right: #{($i * 5)}px;
+      }
+  }
+}

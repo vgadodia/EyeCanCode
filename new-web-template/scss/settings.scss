@@ -1,0 +1,388 @@
+@import 'helpers/variables';
+@import 'helpers/mixins';
+@import 'helpers/spacings';
+/* Reset CSS */
+@import url('https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700,800,900&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $primary-font;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #1f1f1f;
+    background: $body-color;
+}
+.site-wrapper{
+    overflow: hidden;
+}
+
+.slick-slide{
+    &:focus{
+        border:none;
+        outline:none;
+    }
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+    font-weight:700;
+}
+
+h1{
+    font-size: 50px
+}
+h2{
+    font-size: 24px;
+    line-height: 36px;
+    letter-spacing: 0;
+    @include tablet {
+        font-size: 38px;
+    }
+}
+h3{
+    font-size: 28px;
+}
+h4{
+    font-size: 24px;
+}
+h5,.h5{
+    font-size: 16px;
+    line-height: 26px;
+    letter-spacing: 0;
+    @include tablet {
+        font-size: 21px;
+    }
+}
+h6{
+    font-size: 18px;
+}
+
+
+a,
+span {
+    display: inline-block;
+}
+
+a {
+    transition: 0.4s;
+    color: inherit;
+    &:focus {
+        outline: none !important;
+    }
+    &:hover {
+        text-decoration: none;
+    }
+    
+    &:visited {
+        text-decoration: none;
+    }
+    
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+}
+
+img {
+    max-width: 100%;
+}
+
+p {
+    font-size: 15px;
+    &.lg{
+        font-size: 16px;
+    }
+    &.sm{
+        font-size: 12px;
+    }
+    @include tablet {
+        font-size: 17px;
+    }
+}
+span{
+    font-size: 12px;
+}
+
+.btn:focus,
+.btn:active {
+    box-shadow: none;
+}
+
+button {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    &:focus {
+        outline: none;
+    }
+}
+
+.card {
+    border: none;
+    border-radius: 0;
+}
+
+
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+
+/* Common Classes */
+
+.section-padding{
+    padding-top: 120px;
+    padding-bottom: 120px;
+}
+
+/* Typography */ 
+.title-large{
+    font-size: 38px;
+}
+.title-mid{
+    font-size: 21px;
+}
+
+/* Background Image */
+.bg-image{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+/* Buttons */
+
+.btn{
+    font-family: 'Karla', sans-serif;
+    letter-spacing: -1.12px;
+    font-weight: 700;
+    font-size: 18px;
+    transition: .4s;
+    border-radius: 3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    
+    &--primary{
+        background-color: $primary-color;
+        color: #FFF;
+        &:hover {
+            background-color: rgba($primary-color,.8);
+            color: #fff;
+        }
+    }
+    &-outlined--primary{
+        background-color: transparent;
+        color: $primary-color;
+        border: 2px solid $primary-color;
+        &.btn-hover-simple{
+            &:hover {
+                background-color: rgba($primary-color,1);
+                color: #fff;
+            }
+        }
+    }
+    &--orange {
+        color: #ffffff;
+        background-color: #fc593b;
+        &:hover {
+            color: #fff;
+            background-color: rgba(#fc593b,.8);
+            
+        }
+        &.btn-hover-shine{
+            background-color: rgba(#fc593b,1);
+        }
+    }
+    &-outlined--white {
+        color: #fff;
+        border: 2px solid #fff;
+        &:hover {
+            background-color: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+    }
+    &--white {
+        color: $primary-color;
+        background-color: #ffffff;
+        &:hover {
+            color: $primary-color;
+            background-color: rgba(#ffffff,.8);
+            
+        }
+    }
+    &--green {
+        color: #ffffff;
+        background-color: #4eab08;
+        &:hover {
+            background-color: rgba(#4eab08,.8);
+            color: #ffff;
+        }
+    }
+
+    &-sm{
+        height: 40px;
+        font-size: 16px;
+        letter-spacing: -1px;
+        min-width: 137px;
+    }
+   
+    &--hover-shine{
+        overflow: hidden;
+        position:relative;
+        transition: all 0.5s;
+        &:before{
+            content:'';
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: rgba(255,255,255,0.4);
+                -webkit-transition: none;
+                -moz-transition: none;
+                        transition: none;
+        }
+        &:hover{
+            &:before{
+                width: 120%;
+                background-color: rgba(255,255,255,0);
+                -webkit-transition: all 0.4s ease-in-out;
+                    -moz-transition: all 0.4s ease-in-out;
+                        transition: all 0.4s ease-in-out;
+            
+            }
+        }
+    
+        
+    }
+
+}
+
+.btn-lg{
+    @include btn-lg;
+}
+ 
+
+
+.flex-all-center{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+.text--primary{
+color: $primary-color;
+}
+
+.fs-inherit{
+    font-size: inherit;
+}
+  
+  /* Go from zero to full opacity */
+  @keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+/* Margin  */
+
+.mb-d-30 {
+    margin-bottom: -30px;
+}
+
+.mb--30{
+    margin-bottom: 30px;
+}
+
+.mb--65 {
+    margin-bottom: 65px;
+  }
+
+.rotate-45 {
+    transform: rotate(45deg);
+}
+
+.form-control{
+    &:focus{
+        box-shadow: none;
+    }
+}
+
+.shape-holder{
+    position:absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    img{
+        width: 100%;
+        max-width: initial;
+    }
+}
+
+.spacing-bottom{
+    @include section-padding-bottom;
+}
+
+
+.section-devider{
+    border:1px solid #e5e5e5;
+    display: block;
+}
+
+
+.animate-spin{
+    animation-name: spin;
+    animation-duration: 6000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+
+@keyframes pulse-animation {
+    0% {
+      transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+      opacity: 0;
+    }
+  }
