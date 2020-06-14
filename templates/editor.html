@@ -106,14 +106,11 @@
         font-size: 20px;
         font-weight: bold;
         border: 2px solid #ddd;
-        padding: 5px;
+        padding: 15px;
         text-align: left;
-        height: 150px;
-        width: 500px;
+        min-height: 150px;
         font-family: monospace;
-        font-weight: 400;
-        margin: auto;
-        margin-bottom: 50px;
+        font-weight:500;
     }
 </style>
 </head>
@@ -168,6 +165,7 @@
         </div>
       </div>
     </div>
+    
 
     <div class="row justify-content-center">
         <div class="col-lg-10">
@@ -175,6 +173,13 @@
             <h3 style="margin-bottom: -100px;">Speech</h3>
             <!-- <p>We designed and tested prototypes that helped identify pain points in the account creation process. Together, we shaped the new standard.</p> -->
           </div>
+        </div>
+    </div>
+    <div class="center">
+        <p>
+        <div id="div_language">
+            <select id="select_language" onchange="updateCountry()"></select>
+            <select id="select_dialect"></select>
         </div>
     </div>
   <div id="info">
@@ -245,24 +250,22 @@
                 <p style="font-family:monospace;font-weight:400;" id="result_code"></p>
             </div>
         </div>
-        <div class="col-6">
-            <p style="text-align: center; color: #777;">Python Code</p>
-            <div id="code-snippet">
-                print("hello")
-            </div>
-        </div>
     </div>
 </div>
 
-  <div class="center">
-      <p>
-      <div id="div_language">
-          <select id="select_language" onchange="updateCountry()"></select>
-          <select id="select_dialect"></select>
-      </div>
-  </div>
-
     <br><br>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="section-title section-black">
+                <h3 style="margin-bottom: -100px;">Console Output</h3>
+                <!-- <p>We designed and tested prototypes that helped identify pain points in the account creation process. Together, we shaped the new standard.</p> -->
+            </div>
+        </div>
+    </div>
+    <div id="code-snippet">
+        
+    </div>
   </div>
 </section>
 
@@ -663,6 +666,13 @@
     function startButton(event) {
         if (recognizing) {
             recognition.stop();
+            // console.log(event.results[i][0].transcript);
+            document.getElementById("code-snippet").innerHTML = "hello";
+            var formData = new FormData();
+            formData.append("code", lines.join("\n"));
+            var req = new XMLHttpRequest();
+            req.open("POST", "/");
+            req.send(formData);
             return;
         }
         final_transcript = '';

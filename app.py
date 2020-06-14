@@ -16,7 +16,13 @@ def index():
 @app.route('/', methods=["POST"])
 def index1():
     global CODE
-    CODE.append(request.form.get("code", False))
+    # CODE.append(request.form.get("code", False))
+    code = request.form.get("code", False)
+    print(code)
+    ans = ""
+    
+    val = exec(code)
+    print(val)
     return render_template("index.html", code=CODE)
 
 
