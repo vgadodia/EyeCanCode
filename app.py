@@ -14,7 +14,7 @@ def index():
     return render_template("editor.html", code=ans, realcode="", script="")
 
 
-@app.route('/', methods=["POST"])
+@app.route('/send_data', methods=["POST"])
 def index1():
     global ans
     # CODE.append(request.form.get("code", False))
@@ -29,8 +29,9 @@ def index1():
         ans = ["THERE HAS BEEN AN ERROR PROCESSING YOUR CODE"]
     print("ANS UNDER")
     print(ans)
-    print(val)
-    return render_template("index.html", code=ans, realcode=orig, script=script)
+    # print(val)
+    print(code, orig, script)
+    return render_template("editor.html", code=ans, realcode=orig, script=script)
 
 
 # @socketio.on('message')
@@ -42,13 +43,15 @@ def index1():
 def edit():
     return render_template("editor.html")
 
+
 @app.route('/academy.html')
 def aca():
     return render_template("academy.html")
 
+
 @app.route('/<string:code>', methods=["POST", "GET"])
 def display(code):
-    global ans 
+    global ans
     ans.append(code)
     return render_template("index.html", code=ans)
 
