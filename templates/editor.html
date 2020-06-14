@@ -101,6 +101,20 @@
         background-color: transparent;
         padding: 0;
     }
+
+    #code-snippet {
+        font-size: 20px;
+        font-weight: bold;
+        border: 2px solid #ddd;
+        padding: 5px;
+        text-align: left;
+        height: 100px;
+        width: 500px;
+        font-family: monospace;
+        font-weight: 400;
+        margin: auto;
+        margin-bottom: 50px;
+    }
 </style>
 </head>
 
@@ -229,6 +243,12 @@
                 <p>{{para}}</p>
                 {% endfor %} -->
                 <p style="font-family:monospace;font-weight:400;" id="result_code"></p>
+            </div>
+        </div>
+        <div class="col-6">
+            <p style="text-align: center; color: #777;">Python Code</p>
+            <div id="code-snippet">
+                print("hello")
             </div>
         </div>
     </div>
@@ -483,7 +503,7 @@
                     console.log(words);
 
                     let str = "";
-                    for (let i = 0; i < addTab; ++i) str += "&emsp;";
+                    for (let i = 0; i < addTab; ++i) str += "&emsp;&emsp;";
 
                     if (words[0] == "back" && words[1] == "tab") {
                         addTab--;
