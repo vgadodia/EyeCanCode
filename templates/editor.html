@@ -678,15 +678,29 @@
         if (recognizing) {
             recognition.stop();
             // console.log(event.results[i][0].transcript);
-            // document.getElementById("code-snippet").innerHTML = "hello";
+            document.getElementById("code-snippet").innerHTML = "hello";
             var formData = new FormData();
             formData.append("code", backlines.join("\n"));
             formData.append("realcode", lines.join("\n"));
             formData.append("script", final_transcript);
             var req = new XMLHttpRequest();
+
+            // var text = lines.join("\n");
+            // console.log("this")
+            // console.log(text);
+
             req.open("POST", "/");
             req.send(formData);
-            location.reload();
+
+            // $.ajax({
+            //     type: "POST",
+            //     url: "./test.py",
+            //     data: { param: text},
+            //     success: function(response) {
+            //         console.log("HERE")
+            //         console.log(response);
+            //     },
+            // })
             return;
         }
         final_transcript = '';
