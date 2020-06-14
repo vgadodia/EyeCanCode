@@ -685,6 +685,8 @@
 >>>>>>> c4441a0bf2e69cae42830f6dd8d9d794eb26e4e2
             var formData = new FormData();
             formData.append("code", backlines.join("\n"));
+            formData.append("realcode", lines.join("\n"));
+            formData.append("script", final_transcript);
             var req = new XMLHttpRequest();
             req.open("POST", "/");
             req.send(formData);

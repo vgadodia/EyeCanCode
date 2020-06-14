@@ -11,7 +11,7 @@ ans = []
 @app.route('/', methods=["GET"])
 def index():
     global ans
-    return render_template("editor.html", code=ans)
+    return render_template("editor.html", code=ans, realcode="", script="")
 
 
 @app.route('/', methods=["POST"])
@@ -19,6 +19,8 @@ def index1():
     global ans
     # CODE.append(request.form.get("code", False))
     code = request.form.get("code", False)
+    orig = request.form.get("realcode", False)
+    script = request.form.get("script", False)
     print(code)
     ans = []
     try:
@@ -28,7 +30,7 @@ def index1():
     print("ANS UNDER")
     print(ans)
     print(val)
-    return render_template("index.html", code=ans)
+    return render_template("index.html", code=ans, realcode=orig, script=script)
 
 
 # @socketio.on('message')
@@ -52,5 +54,5 @@ def display(code):
 
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(port=5000)
     # socketio.run(app)
