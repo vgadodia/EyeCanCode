@@ -479,9 +479,11 @@
                     // req.open("POST", "/" + event.results[i][0].transcript);
                     // req.send(formData);
                     let words = event.results[i][0].transcript.split(" ");
+                    if (words[0] == "") words.shift();
+                    console.log(words);
 
                     let str = "";
-                    for (let i = 0; i < addTab; ++i) str += "\t";
+                    for (let i = 0; i < addTab; ++i) str += "&emsp;";
 
                     if (words[0] == "back" && words[1] == "tab") {
                         addTab--;
@@ -494,7 +496,7 @@
                             str += "print(" + (word_to_num[words[1]]) + ")";
                         } else {
                             words.shift();
-                            str += "print(" + words.join(" ") + ")"
+                            str += "print(" + words.join(" ") + ")";
                         }
                     } else if ((words[1] == "equals" || words[1] == "=") && words[2] == "string") {
                         let first = words.shift();
@@ -525,12 +527,44 @@
                             words.shift();
                             str += first + " = " + words.join(" ");
                         }
+                    } else if (words[0] == "if" && (words[2] == "equals" || words[2] == "=") && words[3] == "string") {
+                        words[2] = "=="
+                        let words1 = words;
+                        str += words1.slice(0, 3).join(" ") + " \'" + words.slice(4, words.length).join(" ") + "\':";
+                        addTab += 1
                     } else if (words[0] == "if" && (words[2] == "equals" || words[2] == "=")) {
                         words[2] = "==";
                         str += words.join(" ") + ":";
+                        addTab++;
+                    } else if (words[0] == "for" && words[3] == "range") {
+                        let words1 = words;
+                        str += words1.slice(0, 4).join(" ") + "(" + words.slice(4, words.length).join(" ") + "):";
+                        addTab++;
+                    } else if (words[0] == "for") {
+                        str += words.join(" ") + ":";
+                        addTab++;
+                    } else if (words[0] == "function" && words.length == 2) {
+                        str += "def " + words[1] + "():"
+                        addTab++;
+                    } else if (words[0] == "function" && words.length > 2) {
+                        str += "def " + words[1] + "(";
+                        for (let j = 3; j < words.length; j++) {
+                            str += words[j] + ", ";
+                        }
+                        str = str.substring(0, str.length - 2) + "):";
+                        addTab++;
+                    } else if (words[0] == "call" && words.length == 2) {
+                        str += words[1] + "()";
+                    } else if (words[0] == "call" && words.length > 2) {
+                        str += words[1] + "(";
+                        for (let j = 3; j < words.length; ++j) {
+                            str += words[j] + ", ";
+                        }
+                        str = str.substring(0, str.length - 2) + ")";
                     } else {
-                        str += words.join(" ");
+                        str += "# " + words.join(" ");
                     }
+
                     console.log(str);
                     lines.push(str);
                     document.getElementById("result_code").innerHTML = lines.join("<br>");
