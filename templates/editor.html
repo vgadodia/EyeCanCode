@@ -264,7 +264,9 @@
         </div>
     </div>
     <div id="code-snippet">
-        
+        {% for para in code %}
+        <p>{{para}}</p>
+        {% endfor %}
     </div>
   </div>
 </section>
@@ -432,6 +434,7 @@
         }
     let addTab = 0;
     let lines = [];
+    let backlines = [];
     if (!('webkitSpeechRecognition' in window)) {
         upgrade();
     } else {
@@ -506,6 +509,7 @@
                     console.log(words);
 
                     let str = "";
+                    let pushed = false;
                     for (let i = 0; i < addTab; ++i) str += "&emsp;&emsp;&emsp;&emsp;";
 
                     if (words[0] == "back" && words[1] == "tab") {
@@ -514,12 +518,18 @@
                         words.shift();
                         words.shift();
                         str += "print(\"" + words.join(" ") + "\")"
+                        backlines.push("ans.append('" + words.join(" ") + "')");
+                        pushed = true;
                     } else if (words[0] == "print") {
                         if (word_to_num[words[1]]) {
                             str += "print(" + (word_to_num[words[1]]) + ")";
+                            backlines.push("ans.append(" + (word_to_num[words[1]]) + ")");
+                            pushed=true;
                         } else {
                             words.shift();
                             str += "print(" + words.join(" ") + ")";
+                            backlines.push("ans.append(" + (word_to_num[words[1]]) + ")");
+                            pushed = true;
                         }
                     } else if ((words[1] == "equals" || words[1] == "=") && words[2] == "string") {
                         let first = words.shift();
@@ -590,6 +600,7 @@
 
                     console.log(str);
                     lines.push(str);
+                    if (!pushed) backlines.push(str);
                     document.getElementById("result_code").innerHTML = lines.join("<br>");
                     
                     // var xhttp = new XMLHttpRequest();
@@ -667,12 +678,13 @@
         if (recognizing) {
             recognition.stop();
             // console.log(event.results[i][0].transcript);
-            document.getElementById("code-snippet").innerHTML = "hello";
+            // document.getElementById("code-snippet").innerHTML = "hello";
             var formData = new FormData();
-            formData.append("code", lines.join("\n"));
+            formData.append("code", backlines.join("\n"));
             var req = new XMLHttpRequest();
             req.open("POST", "/");
             req.send(formData);
+            location.reload();
             return;
         }
         final_transcript = '';
