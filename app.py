@@ -1,29 +1,34 @@
 from flask import Flask, render_template, request
-from flask_socketio import SocketIO
+# from flask_socketio import SocketIO
 # import SpeechToText
 
 app = Flask(__name__)
 # app.config['SECRET_KEY'] = 'jsbcfsbfjefebw237u3gdbdc'
 # socketio = SocketIO(app)
-CODE = []
+ans = []
 
 
 @app.route('/', methods=["GET"])
 def index():
-    return render_template("editor.html", code=CODE)
+    global ans
+    return render_template("editor.html", code=ans)
 
 
 @app.route('/', methods=["POST"])
 def index1():
-    global CODE
+    global ans
     # CODE.append(request.form.get("code", False))
     code = request.form.get("code", False)
     print(code)
-    ans = ""
-    
-    val = exec(code)
+    ans = []
+    try:
+        val = exec(code)
+    except:
+        ans = ["THERE HAS BEEN AN ERROR PROCESSING YOUR CODE"]
+    print("ANS UNDER")
+    print(ans)
     print(val)
-    return render_template("index.html", code=CODE)
+    return render_template("index.html", code=ans)
 
 
 # @socketio.on('message')
@@ -41,9 +46,9 @@ def aca():
 
 @app.route('/<string:code>', methods=["POST", "GET"])
 def display(code):
-    global CODE 
-    CODE.append(code)
-    return render_template("index.html", code=CODE)
+    global ans 
+    ans.append(code)
+    return render_template("index.html", code=ans)
 
 
 if __name__ == '__main__':
