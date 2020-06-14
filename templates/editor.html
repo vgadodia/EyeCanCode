@@ -108,7 +108,7 @@
         border: 2px solid #ddd;
         padding: 5px;
         text-align: left;
-        height: 100px;
+        height: 150px;
         width: 500px;
         font-family: monospace;
         font-weight: 400;
@@ -491,14 +491,14 @@
             var interim_transcript = '';
             for (var i = event.resultIndex; i < event.results.length; ++i) {
                 if (event.results[i].isFinal) {
-                    final_transcript += event.results[i][0].transcript;
+                    final_transcript += event.results[i][0].transcript.toLowerCase();
                     // console.log(event.results[i][0].transcript);
                     // var formData = new FormData();
                     // formData.append("name", "Murdock");
                     // var req = new XMLHttpRequest();
                     // req.open("POST", "/" + event.results[i][0].transcript);
                     // req.send(formData);
-                    let words = event.results[i][0].transcript.split(" ");
+                    let words = event.results[i][0].transcript.toLowerCase().split(" ");
                     if (words[0] == "") words.shift();
                     console.log(words);
 
