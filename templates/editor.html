@@ -208,6 +208,7 @@
                 </div>
 
                 <div id="results">
+                    {{script}}
                     <span id="final_span" class="final"></span>
                     <span id="interim_span" class="interim"></span>
                     <p>
@@ -217,7 +218,7 @@
                     <div class="col-lg-10">
                         <div class="section-title section-black">
                             <h3 style="margin-top: 30px;margin-bottom: -100px;">Python Code</h3>
-                            {{script}}
+                            
                             <!-- <p>We designed and tested prototypes that helped identify pain points in the account creation process. Together, we shaped the new standard.</p> -->
                         </div>
                     </div>
@@ -252,7 +253,11 @@
                                 <!-- {% for para in code %}
                 <p>{{para}}</p>
                 {% endfor %} -->
-                                <p style="font-family:monospace;font-weight:400;" id="result_code">{{realcode}}</p>
+                                <p style="font-family:monospace;font-weight:400;" id="result_code">
+                                    {% for para in realcode %}
+                                    <p>{{para}}</p>
+                                    {% endfor %}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -693,7 +698,8 @@
                 var req = new XMLHttpRequest();
                 req.open("POST", "/send_data");
                 req.send(formData);
-                location.reload();
+                window.open("/send_data", "_self")
+                // location.reload();
                 return;
             }
             final_transcript = '';
