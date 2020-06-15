@@ -13,7 +13,7 @@ script = ""
 @app.route('/', methods=["GET"])
 def index():
     global ans
-    return render_template("editor.html", code=ans, realcode="", script="")
+    return render_template("index.html", code=ans, realcode="", script="")
 
 
 @app.route('/send_data', methods=["GET", "POST"])
@@ -61,11 +61,11 @@ def aca():
     return render_template("academy.html")
 
 
-# @app.route('/<string:code>', methods=["POST", "GET"])
-# def display(code):
-#     global ans
-#     ans.append(code)
-#     return render_template("index.html", code=ans)
+@app.route('/<string:code>', methods=["POST", "GET"])
+def display(code):
+    global ans
+    ans.append(code)
+    return render_template("index.html", code=ans)
 
 
 if __name__ == '__main__':
